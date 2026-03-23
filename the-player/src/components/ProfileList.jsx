@@ -12,9 +12,14 @@ export default function ProfileList({ onNavigate }) {
 
   return (
     <div>
-      {/* Filter chips */}
       <div className="section" style={{ paddingBottom: 0 }}>
-        <div className="chip-grid">
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
+          <h2 style={{ fontSize: 20 }}>Roster</h2>
+          <button className="btn btn-sm btn-primary" onClick={() => onNavigate('form')}>+ Add</button>
+        </div>
+
+        {/* Filter chips */}
+        <div className="chip-grid" style={{ marginBottom: 4 }}>
           <span className={`chip ${filter === 'All' ? 'active' : ''}`} onClick={() => setFilter('All')}>
             All ({profiles.length})
           </span>
@@ -33,29 +38,50 @@ export default function ProfileList({ onNavigate }) {
       {/* Profile cards */}
       {filtered.map(p => {
         const cycle = p.lastPeriodStart ? getCycleInfo(p.lastPeriodStart, p.cycleLength) : null;
+        const contacts = p.contactLog || [];
+        const lastContact = contacts.length > 0 ? contacts[contacts.length - 1] : null;
+        const lastType = lastContact?.type;
+        const herTurn = lastType === 'text_sent' || lastType === 'you_initiated';
+
+        let timeSince = '';
+        if (lastContact) {
+          const diff = (Date.now() - new Date(lastContact.timestamp).getTime()) / (1000 * 60 * 60);
+          if (diff < 1) timeSince = 'Just now';
+          else if (diff < 24) timeSince = `${Math.floor(diff)}h ago`;
+          else timeSince = `${Math.floor(diff / 24)}d ago`;
+        }
+
         return (
           <div key={p.id} className="card" style={{ cursor: 'pointer' }}
             onClick={() => { setActive(p.id); onNavigate('detail'); }}>
-            <div className="card-header">
-              <div className="avatar">{p.name?.[0] || '?'}</div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+              <div className="avatar" style={{
+                width: 44, height: 44, fontSize: 16,
+                background: cycle ? cycle.phase.color : undefined,
+              }}>
+                {p.name?.[0] || '?'}
+              </div>
               <div style={{ flex: 1 }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <strong>{p.name}{p.age ? `, ${p.age}` : ''}</strong>
-                  <span className="tag tag-accent">{p.relationshipStage}</span>
+                  <div>
+                    <strong style={{ fontSize: 15 }}>{p.name}</strong>
+                    {p.age && <span style={{ color: 'var(--text-muted)', fontSize: 13 }}>, {p.age}</span>}
+                  </div>
+                  <span className="tag tag-outline" style={{ fontSize: 10 }}>{p.relationshipStage}</span>
                 </div>
-                <div style={{ display: 'flex', gap: 6, marginTop: 6, flexWrap: 'wrap', alignItems: 'center' }}>
-                  {p.zodiacSign && <span className="tag tag-outline">{p.zodiacSign}</span>}
-                  {p.attachmentStyle && <span className="tag tag-outline">{p.attachmentStyle}</span>}
+                <div style={{ display: 'flex', gap: 6, marginTop: 4, alignItems: 'center', flexWrap: 'wrap' }}>
                   {cycle && (
-                    <span style={{ fontSize: 12, display: 'flex', alignItems: 'center' }}>
+                    <span style={{ fontSize: 11, display: 'flex', alignItems: 'center' }}>
                       <span className="phase-dot" style={{ background: cycle.phase.color }} />
-                      Day {cycle.cycleDay}
+                      {cycle.phase.label} D{cycle.cycleDay}
                     </span>
                   )}
+                  {p.zodiacSign && <span style={{ fontSize: 11, color: 'var(--text-muted)' }}>{p.zodiacSign}</span>}
+                  {p.attachmentStyle && <span style={{ fontSize: 11, color: 'var(--text-muted)' }}>{p.attachmentStyle}</span>}
                 </div>
-                {p.interests?.length > 0 && (
-                  <div style={{ fontSize: 12, color: 'var(--text-muted)', marginTop: 4 }}>
-                    {p.interests.slice(0, 3).join(' · ')}
+                {lastContact && (
+                  <div style={{ fontSize: 11, color: 'var(--text-muted)', marginTop: 2 }}>
+                    {herTurn ? 'Waiting on her' : 'Your move'} · {timeSince}
                   </div>
                 )}
               </div>
@@ -66,8 +92,10 @@ export default function ProfileList({ onNavigate }) {
 
       {filtered.length === 0 && (
         <div className="empty-state">
-          <p>No profiles found.</p>
-          <button className="btn btn-primary" onClick={() => onNavigate('form')}>Add Someone</button>
+          <p>{profiles.length === 0 ? 'No one on the roster yet.' : 'No profiles match this filter.'}</p>
+          {profiles.length === 0 && (
+            <button className="btn btn-primary" onClick={() => onNavigate('form')}>Add Someone</button>
+          )}
         </div>
       )}
     </div>
