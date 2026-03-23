@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import useStore from '../hooks/useStore.js';
-import { ZODIAC_ELEMENTS, ZODIAC_COMPATIBILITY, ZODIAC_TRAITS, ATTACHMENT_STYLES, CONTACT_TYPES } from '../models/schemas.js';
+import { ZODIAC_ELEMENTS, ZODIAC_COMPATIBILITY, ZODIAC_TRAITS, ATTACHMENT_STYLES, CONTACT_TYPES, PLATFORMS } from '../models/schemas.js';
 import { getCycleInfo, getDateRecommendation } from '../utils/cycleTracker.js';
 import { generateTextSuggestions, getCommunicationPlaybook, getPreDateBriefing } from '../utils/messagingEngine.js';
 
@@ -15,6 +15,7 @@ export default function ProfileDetail({ onNavigate }) {
   const removeDetail = useStore(s => s.removeDetail);
   const [tab, setTab] = useState('actions');
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const [logPlatform, setLogPlatform] = useState('');
 
   if (!profile) {
     return (
@@ -57,6 +58,26 @@ export default function ProfileDetail({ onNavigate }) {
           )}
           {compat && <span className={`compat-badge compat-${compat}`}>{compat} match</span>}
         </div>
+        {/* Platform badges */}
+        {profile.activePlatforms?.length > 0 && (
+          <div style={{ display: 'flex', gap: 4, justifyContent: 'center', marginTop: 6, flexWrap: 'wrap' }}>
+            {profile.activePlatforms.map(pid => {
+              const plat = PLATFORMS.find(p => p.id === pid);
+              if (!plat) return null;
+              const isPrimary = profile.primaryPlatform === pid;
+              return (
+                <span key={pid} style={{
+                  fontSize: 11, padding: '2px 8px', borderRadius: 10,
+                  background: isPrimary ? 'var(--accent)' : 'var(--bg-hover)',
+                  color: isPrimary ? 'white' : 'var(--text-secondary)',
+                  border: isPrimary ? 'none' : '1px solid var(--border)',
+                }}>
+                  {plat.icon} {plat.label}{isPrimary ? ' (main)' : ''}
+                </span>
+              );
+            })}
+          </div>
+        )}
         <div style={{ display: 'flex', gap: 8, justifyContent: 'center', marginTop: 10 }}>
           <button className="btn btn-ghost btn-sm" onClick={() => onNavigate('form', { editId: profile.id })}>Edit</button>
           <button className="btn btn-ghost btn-sm" onClick={() => onNavigate('playbook')}>Playbook</button>
@@ -95,11 +116,24 @@ export default function ProfileDetail({ onNavigate }) {
       {/* Quick Contact Log */}
       <div className="section" style={{ paddingBottom: 8 }}>
         <div className="section-title">Quick Log</div>
+        {/* Platform select for logging */}
+        <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', marginBottom: 8 }}>
+          {(profile.activePlatforms?.length > 0
+            ? PLATFORMS.filter(p => profile.activePlatforms.includes(p.id))
+            : PLATFORMS.filter(p => ['imessage', 'snapchat', 'instagram'].includes(p.id))
+          ).map(plat => (
+            <span key={plat.id} className={`chip ${logPlatform === plat.id ? 'active' : ''}`}
+              style={{ fontSize: 11, padding: '2px 8px' }}
+              onClick={() => setLogPlatform(logPlatform === plat.id ? '' : plat.id)}>
+              {plat.icon} {plat.label}
+            </span>
+          ))}
+        </div>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
           {CONTACT_TYPES.map(ct => (
             <button key={ct.id} className="btn btn-ghost btn-sm"
               style={{ fontSize: 12 }}
-              onClick={() => logContact(profile.id, ct.id)}>
+              onClick={() => logContact(profile.id, ct.id, '', logPlatform || profile.primaryPlatform || '')}>
               {ct.icon} {ct.label}
             </button>
           ))}
@@ -172,9 +206,13 @@ function ActionsTab({ profile, cycle, playbook, user, onNavigate }) {
               date: '📍 Date', hookup: '🔥 Hookup', she_initiated: '⭐ She initiated',
               you_initiated: '🎯 You initiated', left_on_read: '👻 Left on read', ghosted: '💀 Ghosted' };
             const timeAgo = getTimeAgo(c.timestamp);
+            const plat = c.platform ? PLATFORMS.find(p => p.id === c.platform) : null;
             return (
               <div key={i} style={{ display: 'flex', justifyContent: 'space-between', padding: '6px 0', borderBottom: '1px solid var(--border)' }}>
-                <span style={{ fontSize: 13 }}>{ct[c.type] || c.type}</span>
+                <span style={{ fontSize: 13 }}>
+                  {ct[c.type] || c.type}
+                  {plat && <span style={{ fontSize: 11, color: 'var(--text-muted)', marginLeft: 6 }}>on {plat.icon} {plat.label}</span>}
+                </span>
                 <span style={{ fontSize: 12, color: 'var(--text-muted)' }}>{timeAgo}</span>
               </div>
             );

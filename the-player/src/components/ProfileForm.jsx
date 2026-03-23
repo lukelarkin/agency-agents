@@ -3,7 +3,7 @@ import useStore from '../hooks/useStore.js';
 import {
   ZODIAC_SIGNS, ATTACHMENT_STYLES, BIRTH_CONTROL_TYPES,
   LOVE_LANGUAGES, RELATIONSHIP_STAGES, INTEREST_CATEGORIES,
-  FAMILY_DYNAMICS, VALUES,
+  FAMILY_DYNAMICS, VALUES, PLATFORMS,
 } from '../models/schemas.js';
 
 export default function ProfileForm({ editingId, onNavigate }) {
@@ -18,7 +18,7 @@ export default function ProfileForm({ editingId, onNavigate }) {
     name: '', nickname: '', age: '', zodiacSign: '', attachmentStyle: '',
     loveLanguages: [], birthControl: '', cycleLength: 28, lastPeriodStart: '',
     interests: [], values: [], familyDynamics: [], relationshipStage: 'Prospect',
-    metOn: '', notes: '',
+    metOn: '', activePlatforms: [], primaryPlatform: '', notes: '',
   });
 
   useEffect(() => {
@@ -38,6 +38,8 @@ export default function ProfileForm({ editingId, onNavigate }) {
         familyDynamics: existing.familyDynamics || [],
         relationshipStage: existing.relationshipStage || 'Prospect',
         metOn: existing.metOn || '',
+        activePlatforms: existing.activePlatforms || [],
+        primaryPlatform: existing.primaryPlatform || '',
         notes: existing.notes || '',
       });
     }
@@ -104,6 +106,33 @@ export default function ProfileForm({ editingId, onNavigate }) {
         <input className="input" value={form.metOn} placeholder="Hinge, bar, gym, friend intro..."
           onChange={e => setForm({ ...form, metOn: e.target.value })} />
       </div>
+
+      {/* Active Platforms */}
+      <div className="form-group">
+        <label>Platforms You Talk On</label>
+        <div className="chip-grid">
+          {PLATFORMS.map(p => (
+            <span key={p.id} className={`chip ${form.activePlatforms.includes(p.id) ? 'active' : ''}`}
+              onClick={() => toggleChip('activePlatforms', p.id)}>
+              {p.icon} {p.label}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      {form.activePlatforms.length > 1 && (
+        <div className="form-group">
+          <label>Primary Platform (where you text the most)</label>
+          <select className="select" value={form.primaryPlatform}
+            onChange={e => setForm({ ...form, primaryPlatform: e.target.value })}>
+            <option value="">Select main platform</option>
+            {form.activePlatforms.map(pid => {
+              const plat = PLATFORMS.find(p => p.id === pid);
+              return plat ? <option key={pid} value={pid}>{plat.icon} {plat.label}</option> : null;
+            })}
+          </select>
+        </div>
+      )}
 
       {/* Stage */}
       <div className="form-group">

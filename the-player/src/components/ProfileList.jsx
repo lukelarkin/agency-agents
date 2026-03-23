@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import useStore from '../hooks/useStore.js';
-import { RELATIONSHIP_STAGES } from '../models/schemas.js';
+import { RELATIONSHIP_STAGES, PLATFORMS } from '../models/schemas.js';
 import { getCycleInfo } from '../utils/cycleTracker.js';
 
 export default function ProfileList({ onNavigate }) {
@@ -82,6 +82,10 @@ export default function ProfileList({ onNavigate }) {
                 {lastContact && (
                   <div style={{ fontSize: 11, color: 'var(--text-muted)', marginTop: 2 }}>
                     {herTurn ? 'Waiting on her' : 'Your move'} · {timeSince}
+                    {lastContact.platform && (() => {
+                      const plat = PLATFORMS.find(pl => pl.id === lastContact.platform);
+                      return plat ? ` · ${plat.icon} ${plat.label}` : '';
+                    })()}
                   </div>
                 )}
               </div>

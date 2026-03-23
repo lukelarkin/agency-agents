@@ -191,6 +191,23 @@ export const TEXT_SITUATIONS = {
   ],
 };
 
+// ── Platforms ──────────────────────────────────────────────────────
+
+export const PLATFORMS = [
+  { id: 'bumble', label: 'Bumble', icon: '🐝', type: 'dating' },
+  { id: 'tinder', label: 'Tinder', icon: '🔥', type: 'dating' },
+  { id: 'hinge', label: 'Hinge', icon: '🔗', type: 'dating' },
+  { id: 'raya', label: 'Raya', icon: '⭐', type: 'dating' },
+  { id: 'feeld', label: 'Feeld', icon: '🌀', type: 'dating' },
+  { id: 'snapchat', label: 'Snapchat', icon: '👻', type: 'social' },
+  { id: 'instagram', label: 'Instagram', icon: '📸', type: 'social' },
+  { id: 'facebook', label: 'FB Messenger', icon: '💬', type: 'social' },
+  { id: 'imessage', label: 'iMessage', icon: '💚', type: 'phone' },
+  { id: 'whatsapp', label: 'WhatsApp', icon: '📱', type: 'phone' },
+  { id: 'phone', label: 'Phone/SMS', icon: '📞', type: 'phone' },
+  { id: 'irl', label: 'In Person', icon: '👋', type: 'irl' },
+];
+
 /**
  * Creates a blank profile with defaults.
  */
@@ -213,6 +230,8 @@ export function createProfile(overrides = {}) {
     relationshipStage: 'Prospect',
     metOn: '',
     metDetails: '',
+    activePlatforms: [], // which platforms you're currently talking on
+    primaryPlatform: '', // the main one you text on right now
     notes: '',
     dateLog: [],
     contactLog: [],
@@ -248,6 +267,7 @@ export function createContactLog(overrides = {}) {
   return {
     id: crypto.randomUUID(),
     type: 'text_sent',
+    platform: '', // which platform this interaction happened on
     timestamp: new Date().toISOString(),
     note: '',
     ...overrides,

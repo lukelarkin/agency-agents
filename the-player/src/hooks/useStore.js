@@ -83,8 +83,8 @@ const useStore = create(
       },
 
       // ── Contact Log ────────────────────────────────────────────
-      logContact: (profileId, type, note = '') => {
-        const entry = createContactLog({ type, note });
+      logContact: (profileId, type, note = '', platform = '') => {
+        const entry = createContactLog({ type, note, platform });
         set(state => ({
           profiles: state.profiles.map(p =>
             p.id === profileId
