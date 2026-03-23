@@ -269,3 +269,63 @@ export function createJournalEntry(overrides = {}) {
     ...overrides,
   };
 }
+
+// ── Profile Grading ────────────────────────────────────────────────
+
+export const PHOTO_CRITERIA = [
+  { id: 'has_clear_face', label: 'Clear face visible (not blurry, not too far)', weight: 3, tip: 'Your first photo should be a clear headshot or upper body. Natural light, slight smile, looking at camera.' },
+  { id: 'no_group_first', label: 'First photo is just you (no group)', weight: 3, tip: 'She swipes in 0.5 seconds. If she can\'t tell which one you are, she swipes left.' },
+  { id: 'variety', label: 'Mix of settings (not all selfies, not all bar pics)', weight: 2, tip: 'Show range: one outdoor/active, one social, one dressed up, one candid. Tells a story of a full life.' },
+  { id: 'shows_lifestyle', label: 'At least one photo shows you doing something', weight: 2, tip: 'Hiking, cooking, playing guitar, at an event — anything that\'s not posing. Shows you have a life.' },
+  { id: 'good_lighting', label: 'Good lighting (no dark bathroom mirror selfies)', weight: 2, tip: 'Natural light > everything. Golden hour, near a window, outside. Bathroom fluorescent lighting is an instant L.' },
+  { id: 'no_fish_car_gym', label: 'No dead fish, car selfie, or gym mirror pic', weight: 1, tip: 'These are the three horsemen of the dating app apocalypse. Remove immediately.' },
+  { id: 'shows_height_build', label: 'Full body shot included', weight: 1, tip: 'Not hiding your body = confidence. Include one full-body photo even if you\'re not ripped.' },
+  { id: 'recent', label: 'Photos are recent (within last year)', weight: 2, tip: 'If you look different from your photos, the date starts with disappointment. Keep it current.' },
+  { id: 'pet_or_social_proof', label: 'Bonus: photo with a dog/friends/family', weight: 1, tip: 'Social proof signals you\'re not a loner. A dog is a cheat code. But don\'t force it.' },
+];
+
+export const BIO_CRITERIA = [
+  { id: 'has_hook', label: 'Opens with something interesting (not "hey" or "just ask")', weight: 3, tip: 'First line = hook. "I make the best carbonara you\'ll ever have" > "Just a chill guy looking for my person"' },
+  { id: 'shows_personality', label: 'Personality comes through (humor, energy, vibe)', weight: 3, tip: 'She should read your bio and feel like she already knows what you\'d be like to hang out with.' },
+  { id: 'not_generic', label: 'Specific details, not generic claims', weight: 3, tip: '"I once drove 4 hours for the best tacos in New Mexico" > "I love food and travel." Specificity = believability.' },
+  { id: 'no_negativity', label: 'No negative filters ("don\'t waste my time", "no drama")', weight: 2, tip: 'Negativity in a bio signals baggage. You\'re advertising a good time, not posting house rules.' },
+  { id: 'right_length', label: 'Right length (not too short, not an essay)', weight: 2, tip: '2-4 lines is the sweet spot. Long enough to be interesting. Short enough to leave her curious.' },
+  { id: 'has_cta', label: 'Ends with a conversation starter or easy in', weight: 2, tip: '"If you know the best Thai spot in town, we\'re already compatible" gives her something to message about.' },
+  { id: 'no_height_list', label: 'Not a bullet point checklist of stats', weight: 1, tip: '"6\'1 / engineer / gym 5x / coffee addict" is a resume, not a personality. Show, don\'t list.' },
+];
+
+export const PROMPT_CRITERIA = [
+  { id: 'shows_values', label: 'Reveals something real about who you are', weight: 3, tip: 'The prompt answer should make her think "I want to know more" not "I\'ve seen this 50 times today."' },
+  { id: 'conversation_starter', label: 'Easy for her to respond to', weight: 3, tip: 'Great prompts invite a response. "My most controversial opinion: cereal is soup" starts a debate.' },
+  { id: 'specific_not_vague', label: 'Specific and memorable', weight: 2, tip: '"A life goal of mine: open a vinyl cafe in Portugal" > "A life goal: be happy"' },
+  { id: 'humor_or_depth', label: 'Either genuinely funny or genuinely deep', weight: 2, tip: 'Pick a lane per prompt. One funny, one sincere. Both land better than two mediocre attempts at both.' },
+  { id: 'not_overused', label: 'Avoids cliché answers ("The Office", "tacos")', weight: 1, tip: 'If 10,000 other dudes would write the same answer, it doesn\'t differentiate you. Find your unique angle.' },
+];
+
+// ── Date Planning ──────────────────────────────────────────────────
+
+export const DATE_TYPES = [
+  { id: 'coffee', label: 'Coffee', effort: 1, cost: '$', time: 45, vibe: 'Low-key get-to-know-you', bestFor: ['Prospect', 'Talking'] },
+  { id: 'walk', label: 'Walk/Park', effort: 1, cost: 'Free', time: 60, vibe: 'Casual, low pressure, easy exit if needed', bestFor: ['Prospect', 'Talking'] },
+  { id: 'drinks', label: 'Drinks', effort: 2, cost: '$$', time: 90, vibe: 'Classic. Social lubricant. Easy to extend or cut short', bestFor: ['Prospect', 'Talking', 'Dating'] },
+  { id: 'dinner', label: 'Dinner', effort: 3, cost: '$$$', time: 120, vibe: 'Investment date. Save for someone worth it', bestFor: ['Dating', 'Exclusive'] },
+  { id: 'activity', label: 'Activity Date', effort: 3, cost: '$$', time: 120, vibe: 'Bowling, mini golf, cooking class. Shared experience > staring across a table', bestFor: ['Talking', 'Dating'] },
+  { id: 'adventure', label: 'Adventure', effort: 4, cost: '$$', time: 180, vibe: 'Hike, beach day, road trip to somewhere. High reward if she\'s the right one', bestFor: ['Dating', 'Exclusive'] },
+  { id: 'home', label: 'Night In', effort: 2, cost: '$', time: 180, vibe: 'Cook together, movie, intimate. Only when comfort level is there', bestFor: ['Dating', 'Exclusive'] },
+  { id: 'event', label: 'Event/Show', effort: 3, cost: '$$$', time: 180, vibe: 'Concert, comedy show, art gallery. Built-in conversation material', bestFor: ['Talking', 'Dating', 'Exclusive'] },
+];
+
+export const BUDGET_TIERS = [
+  { id: 'broke', label: 'Keeping it tight', monthly: 100, perDate: 15, strategy: 'Coffee dates, free events, parks, home cooking. Creativity > spending.' },
+  { id: 'comfortable', label: 'Comfortable', monthly: 300, perDate: 40, strategy: 'Mix of drinks/coffee for new matches, nicer spots for the ones that matter.' },
+  { id: 'flush', label: 'Money\'s not the issue', monthly: 600, perDate: 80, strategy: 'You can afford experiences. But don\'t lead with money — it attracts the wrong ones.' },
+];
+
+// ── Voice/Writing Style ────────────────────────────────────────────
+
+export const VOICE_TRAITS = [
+  'Uses humor/sarcasm', 'Direct and to the point', 'Emoji heavy', 'No emojis',
+  'Uses slang/casual', 'Proper grammar', 'Short sentences', 'Longer/expressive',
+  'Flirty by default', 'More reserved', 'Uses nicknames (babe, love)',
+  'Asks a lot of questions', 'Makes statements', 'Self-deprecating humor',
+];

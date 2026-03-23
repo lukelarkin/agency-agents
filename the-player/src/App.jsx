@@ -8,6 +8,10 @@ import Playbook from './components/Playbook.jsx';
 import Insights from './components/Insights.jsx';
 import Journal from './components/Journal.jsx';
 import Settings from './components/Settings.jsx';
+import ProfileGrader from './components/ProfileGrader.jsx';
+import MyVoice from './components/MyVoice.jsx';
+import DatePlanner from './components/DatePlanner.jsx';
+import HerScanner from './components/HerScanner.jsx';
 import useStore from './hooks/useStore.js';
 
 export default function App() {
@@ -36,9 +40,16 @@ export default function App() {
       case 'insights': return <Insights onNavigate={navigate} />;
       case 'journal': return <Journal onNavigate={navigate} />;
       case 'settings': return <Settings onNavigate={navigate} />;
+      case 'grader': return <ProfileGrader onNavigate={navigate} />;
+      case 'voice': return <MyVoice onNavigate={navigate} />;
+      case 'planner': return <DatePlanner onNavigate={navigate} />;
+      case 'scanner': return <HerScanner onNavigate={navigate} />;
       default: return <ActionCenter onNavigate={navigate} />;
     }
   };
+
+  // Tools menu for secondary nav items
+  const [showTools, setShowTools] = useState(false);
 
   return (
     <div className="app">
@@ -64,15 +75,49 @@ export default function App() {
           onClick={() => navigate('roster')}>
           <span className="nav-icon">&#9823;</span>Roster
         </button>
+        <button className={`nav-item ${view === 'planner' ? 'active' : ''}`}
+          onClick={() => navigate('planner')}>
+          <span className="nav-icon">&#9734;</span>Plan
+        </button>
         <button className={`nav-item ${view === 'journal' ? 'active' : ''}`}
           onClick={() => navigate('journal')}>
           <span className="nav-icon">&#9998;</span>Journal
         </button>
-        <button className={`nav-item ${view === 'insights' ? 'active' : ''}`}
-          onClick={() => navigate('insights')}>
-          <span className="nav-icon">&#9670;</span>Intel
+        <button className={`nav-item ${showTools ? 'active' : ''}`}
+          onClick={() => setShowTools(!showTools)}>
+          <span className="nav-icon">&#9776;</span>More
         </button>
       </nav>
+
+      {/* Tools overlay */}
+      {showTools && (
+        <div style={{
+          position: 'fixed', bottom: 56, left: '50%', transform: 'translateX(-50%)',
+          width: '100%', maxWidth: 480, background: 'var(--bg-secondary)', borderTop: '1px solid var(--border)',
+          padding: 16, zIndex: 99,
+        }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
+            {[
+              { id: 'grader', icon: '&#127942;', label: 'Profile Grader', desc: 'Grade your dating profile' },
+              { id: 'scanner', icon: '&#128270;', label: 'Her Scanner', desc: 'Scan her profile + chaos rating' },
+              { id: 'voice', icon: '&#127908;', label: 'My Voice', desc: 'Teach app your texting style' },
+              { id: 'insights', icon: '&#9670;', label: 'Intel', desc: 'Analytics and patterns' },
+            ].map(tool => (
+              <button key={tool.id}
+                style={{
+                  background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 'var(--radius-sm)',
+                  padding: 12, cursor: 'pointer', textAlign: 'left', fontFamily: 'inherit',
+                  color: 'var(--text-primary)',
+                }}
+                onClick={() => { navigate(tool.id); setShowTools(false); }}>
+                <div dangerouslySetInnerHTML={{ __html: tool.icon }} style={{ fontSize: 20, marginBottom: 4 }} />
+                <div style={{ fontSize: 13, fontWeight: 600 }}>{tool.label}</div>
+                <div style={{ fontSize: 11, color: 'var(--text-muted)' }}>{tool.desc}</div>
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

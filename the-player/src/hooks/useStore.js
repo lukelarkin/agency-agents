@@ -11,8 +11,43 @@ const useStore = create(
         zodiacSign: null,
         attachmentStyle: null,
         onboarded: false,
+        budgetTier: 'comfortable',
+        customMonthlyBudget: null,
+        maxDatesPerWeek: 3,
+        neighborhood: '',
+        myLat: null,
+        myLng: null,
       },
       updateUser: (updates) => set(s => ({ user: { ...s.user, ...updates } })),
+
+      // ── Voice Learning ────────────────────────────────────────
+      voiceSamples: [],
+      addVoiceSample: (text) => {
+        if (!text?.trim()) return;
+        set(s => ({ voiceSamples: [...s.voiceSamples, { text: text.trim(), addedAt: new Date().toISOString() }] }));
+      },
+      clearVoiceSamples: () => set({ voiceSamples: [] }),
+
+      // ── Venues ────────────────────────────────────────────────
+      venues: [],
+      addVenue: (venue) => set(s => ({ venues: [...s.venues, { id: crypto.randomUUID(), ...venue, addedAt: new Date().toISOString() }] })),
+      removeVenue: (id) => set(s => ({ venues: s.venues.filter(v => v.id !== id) })),
+      updateVenue: (id, updates) => set(s => ({ venues: s.venues.map(v => v.id === id ? { ...v, ...updates } : v) })),
+
+      // ── Profile Grades (cached) ───────────────────────────────
+      profileGrades: {},
+      setProfileGrade: (section, grade) => set(s => ({
+        profileGrades: { ...s.profileGrades, [section]: { ...grade, gradedAt: new Date().toISOString() } },
+      })),
+
+      // ── Her Profile Scans (per profile) ───────────────────────
+      setHerScan: (profileId, scan) => {
+        set(s => ({
+          profiles: s.profiles.map(p =>
+            p.id === profileId ? { ...p, herScan: scan, updatedAt: new Date().toISOString() } : p
+          ),
+        }));
+      },
       completeOnboarding: () => set(s => ({ user: { ...s.user, onboarded: true } })),
 
       // ── Profiles ───────────────────────────────────────────────
