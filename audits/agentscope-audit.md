@@ -1,9 +1,11 @@
 # AgentScope Framework Audit
 
-**Date:** 2025-03-25
+**Date:** 2026-03-25
 **Repository:** https://github.com/agentscope-ai/agentscope
 **License:** Apache 2.0
-**Origin:** Alibaba DAMO Academy (academic paper-backed)
+**Origin:** Alibaba Tongyi Lab (academic paper-backed: arXiv:2402.14034, arXiv:2508.16279)
+**GitHub Stars:** ~18,900 | **Forks:** ~1,700 | **Python:** 3.10+
+**Ecosystem:** CoPaw (13k stars), ReMe (2.4k stars), AgentScope-Runtime, AgentScope-Studio
 
 ---
 
@@ -52,13 +54,21 @@ Tools are bundled into logical groups (`create_tool_group`) and activated/deacti
 5. **Evaluation framework** — hierarchical Tasks/Solutions/Metrics/Benchmarks with both sequential and distributed (Ray) evaluators
 6. **Explicit memory management** — prevents context bloating and hallucinations through developer-controlled and agent-controlled memory operations
 
+### Additional Capabilities
+7. **Distributed-ready** — actor-based model for seamless local-to-distributed conversion
+8. **Protocol interoperability** — MCP + A2A (Agent-to-Agent) + Anthropic Agent Skills
+9. **Real-time voice agents** — TTS integration and voice interaction support
+10. **Model finetuning** — built-in tuning and automatic prompt optimization
+
 ## Notable Limitations
 
 1. **Python-only** — no JavaScript/TypeScript support
 2. **Heavier setup** — more infrastructure overhead than lightweight alternatives
 3. **Learning curve** — multiple abstraction layers to understand
-4. **RAG is thin** — long-term memory via Mem0 exists but no dedicated RAG pipeline or vector DB integrations documented
-5. **Smaller community** — less ecosystem adoption than LangChain/CrewAI
+4. **RAG is thin** — long-term memory via Mem0/ReMe exists but less mature than dedicated RAG solutions
+5. **Smaller Western community** — ~19k stars vs LangChain (~100k+), CrewAI (~25k+), AutoGen (~40k+)
+6. **Alibaba/China ecosystem tilt** — strong DashScope/Qwen integration may feel less native for Western-only stacks
+7. **Documentation gaps** — feature breadth outpaces documentation depth
 
 ---
 
@@ -157,3 +167,31 @@ For large-scale workflows (full NEXUS-Full 12-24 week builds), AgentScope's Ray 
 | Urgency | **Medium** | Valuable but not blocking current adoption |
 
 **Bottom line:** AgentScope could turn our agent library from a collection of prompts into a runnable multi-agent platform. The biggest win is giving NEXUS an actual execution engine.
+
+---
+
+## Competitive Landscape
+
+| Dimension | AgentScope | LangGraph | CrewAI | AutoGen |
+|-----------|------------|-----------|--------|---------|
+| **Philosophy** | Transparency + model-native reasoning | Graph-based state machines | Role-based teams | Conversational collaboration |
+| **Multi-agent** | MsgHub broadcast, flexible orchestration | Graph nodes/edges | Role delegation | Conversation orchestration |
+| **Tool management** | Group-wise + MCP | LangChain ecosystem | Per-agent | Per-agent + code exec |
+| **Memory** | Dual-layer, DB-backed, compressed | Checkpointed state | Role-based + RAG | Conversation history |
+| **Observability** | OpenTelemetry built-in | LangSmith | Limited | Limited |
+| **Distributed** | Native actor-based | Via deployment tools | No | No |
+| **Production readiness** | High (K8s, sandboxing) | Medium | Medium | Medium |
+| **Community** | ~19k stars (Alibaba) | Part of LangChain (~100k+) | ~25k+ (CrewAI Inc.) | ~40k+ (Microsoft) |
+| **Protocol support** | MCP + A2A + Agent Skills | MCP | MCP | MCP |
+
+**Where AgentScope uniquely excels:** native distributed architecture, OpenTelemetry observability, group-wise tool management, A2A protocol, and strongest production deployment story (Runtime + sandboxing + K8s).
+
+---
+
+## Sources
+
+- [AgentScope GitHub](https://github.com/agentscope-ai/agentscope)
+- [AgentScope 1.0 Paper (arXiv:2508.16279)](https://arxiv.org/html/2508.16279v1)
+- [Original Paper (arXiv:2402.14034)](https://arxiv.org/abs/2402.14034)
+- [Analytics Vidhya: AgentScope AI Guide](https://www.analyticsvidhya.com/blog/2026/01/agentscope-ai/)
+- [Turing: AI Agent Frameworks 2026](https://www.turing.com/resources/ai-agent-frameworks)
