@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Executive Cleaning of Idaho | Professional Cleaning Services in Boise</title>
+  <meta name="description" content="Professional residential and commercial cleaning services in Boise, Meridian, Eagle, and Nampa Idaho. Get an instant quote online.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: { 50: '#f0fdf4', 100: '#dcfce7', 200: '#bbf7d0', 500: '#22c55e', 600: '#16a34a', 700: '#15803d', 800: '#166534', 900: '#14532d' },
+            slate: { 50: '#f8fafc', 100: '#f1f5f9', 200: '#e2e8f0', 700: '#334155', 800: '#1e293b', 900: '#0f172a' }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    .quote-step { display: none; }
+    .quote-step.active { display: block; }
+    .service-card:hover { transform: translateY(-2px); box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1); }
+    .service-card { transition: all 0.2s ease; cursor: pointer; }
+    .service-card.selected { border-color: #16a34a; background-color: #f0fdf4; }
+    .fade-in { animation: fadeIn 0.3s ease-in; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    .automation-pulse { animation: pulse 2s infinite; }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
+  </style>
+</head>
+<body class="bg-white text-slate-800">
+
+  <!-- Nav -->
+  <nav class="fixed top-0 w-full bg-white/95 backdrop-blur-sm border-b border-slate-100 z-50">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
+      <div class="flex items-center gap-2">
+        <div class="w-8 h-8 bg-brand-600 rounded-lg flex items-center justify-center text-white font-bold text-sm">EC</div>
+        <span class="font-semibold text-slate-900">Executive Cleaning</span>
+      </div>
+      <div class="hidden md:flex gap-6 text-sm text-slate-600">
+        <a href="#services" class="hover:text-brand-600">Services</a>
+        <a href="#how-it-works" class="hover:text-brand-600">How It Works</a>
+        <a href="#pricing" class="hover:text-brand-600">Pricing</a>
+        <a href="#reviews" class="hover:text-brand-600">Reviews</a>
+      </div>
+      <a href="#quote" class="bg-brand-600 text-white text-sm px-4 py-2 rounded-lg hover:bg-brand-700 transition">Get Instant Quote</a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="pt-28 pb-16 px-4">
+    <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+      <div>
+        <div class="inline-block bg-brand-100 text-brand-700 text-xs font-medium px-3 py-1 rounded-full mb-4">Serving the Boise Metro Area</div>
+        <h1 class="text-4xl md:text-5xl font-bold text-slate-900 leading-tight mb-4">
+          Your home cleaned.<br>
+          <span class="text-brand-600">Your time back.</span>
+        </h1>
+        <p class="text-lg text-slate-600 mb-8 max-w-md">
+          Professional residential and commercial cleaning in Boise, Meridian, Eagle, Nampa, and beyond. Book online in 60 seconds.
+        </p>
+        <div class="flex gap-3">
+          <a href="#quote" class="bg-brand-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-brand-700 transition">Get Your Free Quote</a>
+          <a href="tel:2085551234" class="border border-slate-200 text-slate-700 px-6 py-3 rounded-lg font-medium hover:border-brand-600 hover:text-brand-600 transition">(208) 555-1234</a>
+        </div>
+        <div class="flex gap-6 mt-8 text-sm text-slate-500">
+          <div class="flex items-center gap-1"><span class="text-brand-600">&#10003;</span> Licensed & Insured</div>
+          <div class="flex items-center gap-1"><span class="text-brand-600">&#10003;</span> Background Checked</div>
+          <div class="flex items-center gap-1"><span class="text-brand-600">&#10003;</span> Satisfaction Guaranteed</div>
+        </div>
+      </div>
+      <div class="bg-gradient-to-br from-brand-50 to-brand-100 rounded-2xl p-8 text-center">
+        <div class="text-6xl mb-4">&#10024;</div>
+        <div class="text-2xl font-bold text-slate-900 mb-2">4.9 out of 5 stars</div>
+        <div class="text-slate-600">200+ five-star reviews on Google</div>
+        <div class="flex justify-center gap-1 mt-3 text-yellow-400 text-xl">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section id="services" class="py-16 px-4 bg-slate-50">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-3xl font-bold text-center mb-2">Our Services</h2>
+      <p class="text-slate-600 text-center mb-10">Professional cleaning for every situation</p>
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="bg-white rounded-xl p-6 border border-slate-200 service-card">
+          <div class="text-3xl mb-3">&#127968;</div>
+          <h3 class="font-semibold text-lg mb-2">Residential Cleaning</h3>
+          <p class="text-slate-600 text-sm">Regular house cleaning tailored to your home. Weekly, biweekly, or monthly schedules available.</p>
+          <div class="mt-4 text-brand-600 font-medium text-sm">From $120</div>
+        </div>
+        <div class="bg-white rounded-xl p-6 border border-slate-200 service-card">
+          <div class="text-3xl mb-3">&#127970;</div>
+          <h3 class="font-semibold text-lg mb-2">Commercial Cleaning</h3>
+          <p class="text-slate-600 text-sm">Office buildings, retail spaces, medical offices. Custom schedules, after-hours available.</p>
+          <div class="mt-4 text-brand-600 font-medium text-sm">Custom Quote</div>
+        </div>
+        <div class="bg-white rounded-xl p-6 border border-slate-200 service-card">
+          <div class="text-3xl mb-3">&#128230;</div>
+          <h3 class="font-semibold text-lg mb-2">Move-In/Move-Out</h3>
+          <p class="text-slate-600 text-sm">Get your full deposit back. Deep clean every surface, inside every cabinet and appliance.</p>
+          <div class="mt-4 text-brand-600 font-medium text-sm">From $200</div>
+        </div>
+        <div class="bg-white rounded-xl p-6 border border-slate-200 service-card">
+          <div class="text-3xl mb-3">&#129529;</div>
+          <h3 class="font-semibold text-lg mb-2">Deep Cleaning</h3>
+          <p class="text-slate-600 text-sm">Top-to-bottom intensive clean. Baseboards, ceiling fans, behind appliances, inside ovens.</p>
+          <div class="mt-4 text-brand-600 font-medium text-sm">From $250</div>
+        </div>
+        <div class="bg-white rounded-xl p-6 border border-slate-200 service-card">
+          <div class="text-3xl mb-3">&#128679;</div>
+          <h3 class="font-semibold text-lg mb-2">Post-Construction</h3>
+          <p class="text-slate-600 text-sm">Dust, debris, and construction residue removed. We make new builds and remodels shine.</p>
+          <div class="mt-4 text-brand-600 font-medium text-sm">From $300</div>
+        </div>
+        <div class="bg-white rounded-xl p-6 border border-slate-200 service-card">
+          <div class="text-3xl mb-3">&#128155;</div>
+          <h3 class="font-semibold text-lg mb-2">Eco-Friendly Options</h3>
+          <p class="text-slate-600 text-sm">Green cleaning products safe for kids, pets, and the environment. Same spotless results.</p>
+          <div class="mt-4 text-brand-600 font-medium text-sm">+$20 upgrade</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Quote Calculator -->
+  <section id="quote" class="py-16 px-4">
+    <div class="max-w-2xl mx-auto">
+      <h2 class="text-3xl font-bold text-center mb-2">Get Your Instant Quote</h2>
+      <p class="text-slate-600 text-center mb-8">Takes 60 seconds. No phone call needed.</p>
+
+      <div class="bg-white rounded-2xl border border-slate-200 shadow-lg p-8">
+        <!-- Progress bar -->
+        <div class="flex gap-2 mb-8">
+          <div id="prog-1" class="h-1.5 flex-1 rounded-full bg-brand-600 transition-all"></div>
+          <div id="prog-2" class="h-1.5 flex-1 rounded-full bg-slate-200 transition-all"></div>
+          <div id="prog-3" class="h-1.5 flex-1 rounded-full bg-slate-200 transition-all"></div>
+          <div id="prog-4" class="h-1.5 flex-1 rounded-full bg-slate-200 transition-all"></div>
+        </div>
+
+        <!-- Step 1: Service Type -->
+        <div id="step-1" class="quote-step active fade-in">
+          <h3 class="text-lg font-semibold mb-4">What type of cleaning do you need?</h3>
+          <div class="grid grid-cols-2 gap-3" id="service-options">
+            <button onclick="selectService('residential', this)" class="service-card border border-slate-200 rounded-xl p-4 text-left">
+              <div class="text-2xl mb-1">&#127968;</div>
+              <div class="font-medium text-sm">Residential</div>
+              <div class="text-xs text-slate-500">Regular cleaning</div>
+            </button>
+            <button onclick="selectService('deep', this)" class="service-card border border-slate-200 rounded-xl p-4 text-left">
+              <div class="text-2xl mb-1">&#129529;</div>
+              <div class="font-medium text-sm">Deep Clean</div>
+              <div class="text-xs text-slate-500">Top to bottom</div>
+            </button>
+            <button onclick="selectService('moveout', this)" class="service-card border border-slate-200 rounded-xl p-4 text-left">
+              <div class="text-2xl mb-1">&#128230;</div>
+              <div class="font-medium text-sm">Move-In/Out</div>
+              <div class="text-xs text-slate-500">Full deposit back</div>
+            </button>
+            <button onclick="selectService('commercial', this)" class="service-card border border-slate-200 rounded-xl p-4 text-left">
+              <div class="text-2xl mb-1">&#127970;</div>
+              <div class="font-medium text-sm">Commercial</div>
+              <div class="text-xs text-slate-500">Office / retail</div>
+            </button>
+          </div>
+        </div>
+
+        <!-- Step 2: Property Details -->
+        <div id="step-2" class="quote-step fade-in">
+          <h3 class="text-lg font-semibold mb-4">Tell us about the space</h3>
+          <div class="space-y-4">
+            <div>
+              <label class="block text-sm font-medium text-slate-700 mb-1">Bedrooms</label>
+              <div class="flex gap-2" id="bedroom-options">
+                <button onclick="selectBedrooms(1, this)" class="flex-1 border border-slate-200 rounded-lg py-2 text-center text-sm hover:border-brand-600 transition">1</button>
+                <button onclick="selectBedrooms(2, this)" class="flex-1 border border-slate-200 rounded-lg py-2 text-center text-sm hover:border-brand-600 transition">2</button>
+                <button onclick="selectBedrooms(3, this)" class="flex-1 border border-slate-200 rounded-lg py-2 text-center text-sm hover:border-brand-600 transition">3</button>
+                <button onclick="selectBedrooms(4, this)" class="flex-1 border border-slate-200 rounded-lg py-2 text-center text-sm hover:border-brand-600 transition">4</button>
+                <button onclick="selectBedrooms(5, this)" class="flex-1 border border-slate-200 rounded-lg py-2 text-center text-sm hover:border-brand-600 transition">5+</button>
+              </div>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-slate-700 mb-1">Bathrooms</label>
+              <div class="flex gap-2" id="bathroom-options">
+                <button onclick="selectBathrooms(1, this)" class="flex-1 border border-slate-200 rounded-lg py-2 text-center text-sm hover:border-brand-600 transition">1</button>
+                <button onclick="selectBathrooms(2, this)" class="flex-1 border border-slate-200 rounded-lg py-2 text-center text-sm hover:border-brand-600 transition">2</button>
+                <button onclick="selectBathrooms(3, this)" class="flex-1 border border-slate-200 rounded-lg py-2 text-center text-sm hover:border-brand-600 transition">3</button>
+                <button onclick="selectBathrooms(4, this)" class="flex-1 border border-slate-200 rounded-lg py-2 text-center text-sm hover:border-brand-600 transition">4+</button>
+              </div>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-slate-700 mb-1">How often?</label>
+              <div class="grid grid-cols-2 gap-2" id="frequency-options">
+                <button onclick="selectFrequency('once', this)" class="border border-slate-200 rounded-lg py-2 text-center text-sm hover:border-brand-600 transition">One-time</button>
+                <button onclick="selectFrequency('weekly', this)" class="border border-slate-200 rounded-lg py-2 text-center text-sm hover:border-brand-600 transition">Weekly <span class="text-brand-600 text-xs">-20%</span></button>
+                <button onclick="selectFrequency('biweekly', this)" class="border border-slate-200 rounded-lg py-2 text-center text-sm hover:border-brand-600 transition">Biweekly <span class="text-brand-600 text-xs">-15%</span></button>
+                <button onclick="selectFrequency('monthly', this)" class="border border-slate-200 rounded-lg py-2 text-center text-sm hover:border-brand-600 transition">Monthly <span class="text-brand-600 text-xs">-10%</span></button>
+              </div>
+            </div>
+            <button onclick="goToStep(3)" id="step2-next" class="w-full bg-brand-600 text-white py-3 rounded-lg font-medium hover:bg-brand-700 transition disabled:opacity-40 disabled:cursor-not-allowed" disabled>Next</button>
+          </div>
+        </div>
+
+        <!-- Step 3: Contact Info -->
+        <div id="step-3" class="quote-step fade-in">
+          <h3 class="text-lg font-semibold mb-4">Where should we send your quote?</h3>
+          <div class="space-y-3">
+            <input type="text" id="input-name" placeholder="Your name" class="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-brand-600 transition" oninput="checkContactForm()">
+            <input type="email" id="input-email" placeholder="Email address" class="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-brand-600 transition" oninput="checkContactForm()">
+            <input type="tel" id="input-phone" placeholder="Phone number" class="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-brand-600 transition" oninput="checkContactForm()">
+            <input type="text" id="input-address" placeholder="Property address (for accurate quote)" class="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-brand-600 transition" oninput="checkContactForm()">
+            <textarea id="input-notes" placeholder="Anything else we should know? (pets, special requests, access instructions)" rows="2" class="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-brand-600 transition"></textarea>
+            <button onclick="submitQuote()" id="step3-submit" class="w-full bg-brand-600 text-white py-3 rounded-lg font-medium hover:bg-brand-700 transition disabled:opacity-40 disabled:cursor-not-allowed" disabled>Get My Instant Quote</button>
+          </div>
+        </div>
+
+        <!-- Step 4: Quote Result + Automation Demo -->
+        <div id="step-4" class="quote-step fade-in">
+          <div class="text-center mb-6">
+            <div class="text-4xl mb-3">&#9989;</div>
+            <h3 class="text-xl font-bold text-slate-900 mb-1">Your Estimated Quote</h3>
+            <p class="text-sm text-slate-500">Based on your selections</p>
+          </div>
+
+          <div class="bg-slate-50 rounded-xl p-6 mb-6">
+            <div class="flex justify-between items-center mb-3">
+              <span class="text-slate-600" id="quote-service-label">Residential Cleaning</span>
+              <span class="font-medium" id="quote-base-price">$150</span>
+            </div>
+            <div class="flex justify-between items-center mb-3">
+              <span class="text-slate-600" id="quote-size-label">3 bed / 2 bath</span>
+              <span class="font-medium" id="quote-size-adj">+$30</span>
+            </div>
+            <div class="flex justify-between items-center mb-3" id="quote-discount-row" style="display:none">
+              <span class="text-brand-600" id="quote-discount-label">Biweekly discount (15%)</span>
+              <span class="font-medium text-brand-600" id="quote-discount">-$27</span>
+            </div>
+            <hr class="my-3 border-slate-200">
+            <div class="flex justify-between items-center">
+              <span class="font-bold text-lg">Your Price</span>
+              <span class="font-bold text-2xl text-brand-600" id="quote-total">$153</span>
+            </div>
+            <div class="text-xs text-slate-500 mt-1 text-right" id="quote-frequency-note"></div>
+          </div>
+
+          <a href="#" class="block w-full bg-brand-600 text-white py-3 rounded-lg font-medium hover:bg-brand-700 transition text-center mb-3">Book This Cleaning</a>
+          <a href="tel:2085551234" class="block w-full border border-slate-200 text-slate-700 py-3 rounded-lg font-medium text-center hover:border-brand-600 transition">Call to Discuss: (208) 555-1234</a>
+
+          <!-- Automation Demo -->
+          <div class="mt-8 pt-6 border-t border-slate-200">
+            <h4 class="text-sm font-semibold text-slate-900 mb-3 flex items-center gap-2">
+              <span class="automation-pulse inline-block w-2 h-2 bg-brand-600 rounded-full"></span>
+              What just happened automatically
+            </h4>
+            <div id="automation-log" class="space-y-2 text-sm"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section id="how-it-works" class="py-16 px-4 bg-slate-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl font-bold text-center mb-10">How It Works</h2>
+      <div class="grid md:grid-cols-4 gap-6 text-center">
+        <div>
+          <div class="w-10 h-10 bg-brand-600 text-white rounded-full flex items-center justify-center mx-auto mb-3 font-bold">1</div>
+          <h3 class="font-semibold mb-1">Get a Quote</h3>
+          <p class="text-sm text-slate-600">Tell us about your space. Instant pricing, no waiting.</p>
+        </div>
+        <div>
+          <div class="w-10 h-10 bg-brand-600 text-white rounded-full flex items-center justify-center mx-auto mb-3 font-bold">2</div>
+          <h3 class="font-semibold mb-1">Book Online</h3>
+          <p class="text-sm text-slate-600">Pick a date and time that works for you.</p>
+        </div>
+        <div>
+          <div class="w-10 h-10 bg-brand-600 text-white rounded-full flex items-center justify-center mx-auto mb-3 font-bold">3</div>
+          <h3 class="font-semibold mb-1">We Clean</h3>
+          <p class="text-sm text-slate-600">Our background-checked crew arrives on time, every time.</p>
+        </div>
+        <div>
+          <div class="w-10 h-10 bg-brand-600 text-white rounded-full flex items-center justify-center mx-auto mb-3 font-bold">4</div>
+          <h3 class="font-semibold mb-1">Enjoy</h3>
+          <p class="text-sm text-slate-600">Come home to a spotless space. Guaranteed.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing Table -->
+  <section id="pricing" class="py-16 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl font-bold text-center mb-2">Transparent Pricing</h2>
+      <p class="text-slate-600 text-center mb-10">No hidden fees. Discounts for recurring service.</p>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="bg-slate-50">
+              <th class="text-left py-3 px-4 font-semibold rounded-tl-lg">Service</th>
+              <th class="text-center py-3 px-4 font-semibold">1-2 Bed</th>
+              <th class="text-center py-3 px-4 font-semibold">3-4 Bed</th>
+              <th class="text-center py-3 px-4 font-semibold rounded-tr-lg">5+ Bed</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-b border-slate-100">
+              <td class="py-3 px-4 font-medium">Standard Cleaning</td>
+              <td class="text-center py-3 px-4">$120 - $150</td>
+              <td class="text-center py-3 px-4">$150 - $200</td>
+              <td class="text-center py-3 px-4">$200 - $280</td>
+            </tr>
+            <tr class="border-b border-slate-100">
+              <td class="py-3 px-4 font-medium">Deep Cleaning</td>
+              <td class="text-center py-3 px-4">$200 - $280</td>
+              <td class="text-center py-3 px-4">$280 - $380</td>
+              <td class="text-center py-3 px-4">$380 - $500</td>
+            </tr>
+            <tr class="border-b border-slate-100">
+              <td class="py-3 px-4 font-medium">Move-In/Out</td>
+              <td class="text-center py-3 px-4">$200 - $300</td>
+              <td class="text-center py-3 px-4">$300 - $400</td>
+              <td class="text-center py-3 px-4">$400 - $550</td>
+            </tr>
+            <tr>
+              <td class="py-3 px-4 font-medium">Post-Construction</td>
+              <td class="text-center py-3 px-4">$300 - $400</td>
+              <td class="text-center py-3 px-4">$400 - $550</td>
+              <td class="text-center py-3 px-4">$550+</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="flex justify-center gap-6 mt-6 text-sm text-slate-500">
+        <div><span class="text-brand-600 font-medium">Weekly:</span> 20% off</div>
+        <div><span class="text-brand-600 font-medium">Biweekly:</span> 15% off</div>
+        <div><span class="text-brand-600 font-medium">Monthly:</span> 10% off</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reviews -->
+  <section id="reviews" class="py-16 px-4 bg-slate-50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl font-bold text-center mb-10">What Our Customers Say</h2>
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="bg-white rounded-xl p-6 border border-slate-200">
+          <div class="text-yellow-400 mb-2">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="text-sm text-slate-600 mb-4">"Booked online at 9pm, had a confirmation by 9:01pm, and my house was spotless by 3pm the next day. This is how every service should work."</p>
+          <div class="text-sm font-medium">Sarah M.</div>
+          <div class="text-xs text-slate-500">Boise, ID</div>
+        </div>
+        <div class="bg-white rounded-xl p-6 border border-slate-200">
+          <div class="text-yellow-400 mb-2">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="text-sm text-slate-600 mb-4">"We switched our office cleaning to Executive and the difference is night and day. Professional, reliable, and the automated scheduling makes my life easy."</p>
+          <div class="text-sm font-medium">Mike T.</div>
+          <div class="text-xs text-slate-500">Meridian, ID</div>
+        </div>
+        <div class="bg-white rounded-xl p-6 border border-slate-200">
+          <div class="text-yellow-400 mb-2">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="text-sm text-slate-600 mb-4">"Used them for our move-out clean. Got our full deposit back. The instant quote was spot-on with the final price. No surprises."</p>
+          <div class="text-sm font-medium">Jessica & Dan R.</div>
+          <div class="text-xs text-slate-500">Eagle, ID</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Service Area -->
+  <section class="py-16 px-4">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2 class="text-3xl font-bold mb-4">Proudly Serving the Treasure Valley</h2>
+      <p class="text-slate-600 mb-6">Boise &middot; Meridian &middot; Eagle &middot; Star &middot; Nampa &middot; Caldwell &middot; Kuna &middot; Garden City</p>
+      <a href="#quote" class="inline-block bg-brand-600 text-white px-8 py-3 rounded-lg font-medium hover:bg-brand-700 transition">Get Your Free Quote Now</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-slate-900 text-slate-400 py-12 px-4">
+    <div class="max-w-6xl mx-auto grid md:grid-cols-3 gap-8">
+      <div>
+        <div class="flex items-center gap-2 mb-3">
+          <div class="w-8 h-8 bg-brand-600 rounded-lg flex items-center justify-center text-white font-bold text-sm">EC</div>
+          <span class="font-semibold text-white">Executive Cleaning of Idaho</span>
+        </div>
+        <p class="text-sm">Professional cleaning services for homes and businesses across the Boise metro area.</p>
+      </div>
+      <div>
+        <h4 class="font-semibold text-white mb-3">Contact</h4>
+        <p class="text-sm">(208) 555-1234</p>
+        <p class="text-sm">info@executivecleaningidaho.com</p>
+        <p class="text-sm">Boise, Idaho</p>
+      </div>
+      <div>
+        <h4 class="font-semibold text-white mb-3">Hours</h4>
+        <p class="text-sm">Monday - Friday: 7am - 6pm</p>
+        <p class="text-sm">Saturday: 8am - 4pm</p>
+        <p class="text-sm">Sunday: Closed</p>
+      </div>
+    </div>
+    <div class="max-w-6xl mx-auto mt-8 pt-8 border-t border-slate-800 text-center text-xs">
+      &copy; 2026 Executive Cleaning of Idaho. All rights reserved. Licensed, bonded, and insured.
+    </div>
+  </footer>
+
+  <script>
+    // Quote state
+    const quote = { service: null, bedrooms: null, bathrooms: null, frequency: null };
+
+    // Pricing engine (this would be the Flowise AI agent in production)
+    const pricing = {
+      residential: { base: 120, perBed: 15, perBath: 20 },
+      deep:        { base: 200, perBed: 25, perBath: 30 },
+      moveout:     { base: 200, perBed: 30, perBath: 35 },
+      commercial:  { base: 250, perBed: 0,  perBath: 0  }
+    };
+    const discounts = { once: 0, weekly: 0.20, biweekly: 0.15, monthly: 0.10 };
+    const serviceLabels = {
+      residential: 'Residential Cleaning',
+      deep: 'Deep Cleaning',
+      moveout: 'Move-In/Move-Out Cleaning',
+      commercial: 'Commercial Cleaning'
+    };
+    const frequencyLabels = { once: 'One-time', weekly: 'Weekly', biweekly: 'Biweekly', monthly: 'Monthly' };
+
+    function selectService(type, el) {
+      quote.service = type;
+      document.querySelectorAll('#service-options .service-card').forEach(c => c.classList.remove('selected'));
+      el.classList.add('selected');
+      setTimeout(() => goToStep(2), 300);
+    }
+
+    function selectBedrooms(n, el) {
+      quote.bedrooms = n;
+      document.querySelectorAll('#bedroom-options button').forEach(b => { b.classList.remove('bg-brand-600', 'text-white', 'border-brand-600'); });
+      el.classList.add('bg-brand-600', 'text-white', 'border-brand-600');
+      checkStep2();
+    }
+
+    function selectBathrooms(n, el) {
+      quote.bathrooms = n;
+      document.querySelectorAll('#bathroom-options button').forEach(b => { b.classList.remove('bg-brand-600', 'text-white', 'border-brand-600'); });
+      el.classList.add('bg-brand-600', 'text-white', 'border-brand-600');
+      checkStep2();
+    }
+
+    function selectFrequency(f, el) {
+      quote.frequency = f;
+      document.querySelectorAll('#frequency-options button').forEach(b => { b.classList.remove('bg-brand-600', 'text-white', 'border-brand-600'); });
+      el.classList.add('bg-brand-600', 'text-white', 'border-brand-600');
+      checkStep2();
+    }
+
+    function checkStep2() {
+      const ready = quote.bedrooms && quote.bathrooms && quote.frequency;
+      document.getElementById('step2-next').disabled = !ready;
+    }
+
+    function checkContactForm() {
+      const name = document.getElementById('input-name').value.trim();
+      const email = document.getElementById('input-email').value.trim();
+      const phone = document.getElementById('input-phone').value.trim();
+      document.getElementById('step3-submit').disabled = !(name && email && phone);
+    }
+
+    function goToStep(n) {
+      document.querySelectorAll('.quote-step').forEach(s => s.classList.remove('active'));
+      document.getElementById('step-' + n).classList.add('active');
+      for (let i = 1; i <= 4; i++) {
+        document.getElementById('prog-' + i).classList.toggle('bg-brand-600', i <= n);
+        document.getElementById('prog-' + i).classList.toggle('bg-slate-200', i > n);
+      }
+    }
+
+    function calculateQuote() {
+      const p = pricing[quote.service];
+      const base = p.base;
+      const sizeAdj = (p.perBed * (quote.bedrooms - 1)) + (p.perBath * (quote.bathrooms - 1));
+      const subtotal = base + sizeAdj;
+      const disc = discounts[quote.frequency];
+      const discountAmt = Math.round(subtotal * disc);
+      const total = subtotal - discountAmt;
+      return { base, sizeAdj, subtotal, disc, discountAmt, total };
+    }
+
+    function submitQuote() {
+      const q = calculateQuote();
+      const name = document.getElementById('input-name').value.trim();
+      const email = document.getElementById('input-email').value.trim();
+
+      // Populate quote display
+      document.getElementById('quote-service-label').textContent = serviceLabels[quote.service];
+      document.getElementById('quote-base-price').textContent = '$' + q.base;
+      document.getElementById('quote-size-label').textContent = quote.bedrooms + ' bed / ' + quote.bathrooms + ' bath';
+      document.getElementById('quote-size-adj').textContent = q.sizeAdj > 0 ? '+$' + q.sizeAdj : 'Included';
+
+      if (q.disc > 0) {
+        document.getElementById('quote-discount-row').style.display = 'flex';
+        document.getElementById('quote-discount-label').textContent = frequencyLabels[quote.frequency] + ' discount (' + (q.disc * 100) + '%)';
+        document.getElementById('quote-discount').textContent = '-$' + q.discountAmt;
+      } else {
+        document.getElementById('quote-discount-row').style.display = 'none';
+      }
+
+      document.getElementById('quote-total').textContent = '$' + q.total;
+      document.getElementById('quote-frequency-note').textContent = quote.frequency !== 'once' ? 'per visit, billed ' + frequencyLabels[quote.frequency].toLowerCase() : '';
+
+      goToStep(4);
+      runAutomationDemo(name, email, q.total);
+    }
+
+    // Simulates what the n8n + tools stack does in real time
+    function runAutomationDemo(name, email, total) {
+      const log = document.getElementById('automation-log');
+      log.innerHTML = '';
+
+      const events = [
+        { delay: 500,  icon: '&#9889;', tool: 'n8n', text: 'Quote request received via webhook' },
+        { delay: 1200, icon: '&#129302;', tool: 'Flowise AI', text: 'Calculated quote: $' + total + ' based on pricing rules' },
+        { delay: 2000, icon: '&#128196;', tool: 'Invoice Ninja', text: 'PDF estimate generated and ready to send' },
+        { delay: 2800, icon: '&#128231;', tool: 'Novu', text: 'Quote emailed to ' + email },
+        { delay: 3500, icon: '&#128241;', tool: 'Twilio', text: 'SMS confirmation sent: "Hi ' + name + ', your quote is $' + total + '"' },
+        { delay: 4200, icon: '&#128203;', tool: 'Twenty CRM', text: 'New lead created in pipeline: ' + name },
+        { delay: 5000, icon: '&#9200;', tool: 'n8n', text: '48-hour follow-up scheduled if no response' },
+        { delay: 5800, icon: '&#128276;', tool: 'ntfy', text: 'Owner notified: "New $' + total + ' quote from ' + name + '"' },
+      ];
+
+      events.forEach(evt => {
+        setTimeout(() => {
+          const div = document.createElement('div');
+          div.className = 'flex items-start gap-3 fade-in bg-slate-50 rounded-lg px-3 py-2';
+          div.innerHTML = '<span class="text-lg">' + evt.icon + '</span><div><span class="font-medium text-xs text-brand-700 bg-brand-100 px-1.5 py-0.5 rounded">' + evt.tool + '</span> <span class="text-slate-600 text-xs ml-1">' + evt.text + '</span></div>';
+          log.appendChild(div);
+          div.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }, evt.delay);
+      });
+    }
+  </script>
+
+</body>
+</html>
