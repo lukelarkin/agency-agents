@@ -1,442 +1,336 @@
-# Multi-Agent Workflow: Executive Cleaning of Idaho — Business Automation
+# Executive Cleaning of Idaho — Operations Automation Stack
 
-> Automate lead generation, customer communication, proposals, invoicing, reviews, and marketing for a residential & commercial cleaning company using existing Agency agents.
+> Replace Jobber/Housecall Pro with open-source tools + AI agents. Automate scheduling, quoting, invoicing, customer comms, dispatching, reviews, and lead capture.
 
-## The Scenario
+## The Real Pain Points
 
-Executive Cleaning of Idaho needs to stop running on phone calls, spreadsheets, and manual follow-ups. The goal: automate the business end-to-end so the team can focus on cleaning — not chasing leads, writing quotes, or begging for reviews.
+These are what actually eat a cleaning business owner's time — in order of money lost:
 
-## Agent Roster
-
-### Core Automation Team
-
-| Agent | Automation Role |
-|-------|----------------|
-| **Frontend Developer** | Build booking website with online quote request form |
-| **Backend Architect** | Build scheduling API, CRM integration, automated workflows |
-| **SEO Specialist** | Local SEO — rank for "cleaning services Boise/Idaho" |
-| **Content Creator** | Website copy, blog posts, email templates |
-| **Growth Hacker** | Referral programs, review funnels, conversion optimization |
-| **Support Responder** | Automated customer communication templates & chatbot flows |
-| **Proposal Strategist** | Commercial cleaning proposals & bid templates |
-| **Finance Tracker** | Job costing, revenue tracking, invoice automation |
-| **Document Generator** | Auto-generate quotes, invoices, checklists as PDFs |
-| **Analytics Reporter** | Business dashboard — leads, jobs, revenue, reviews |
-
-### Growth Team (Phase 2)
-
-| Agent | Automation Role |
-|-------|----------------|
-| **PPC Campaign Strategist** | Google Ads for local cleaning searches |
-| **Ad Creative Strategist** | Ad copy for local campaigns |
-| **Social Media Strategist** | Facebook/Instagram content calendar |
-| **Instagram Curator** | Before/after photo strategy |
-| **Outbound Strategist** | B2B outreach to property managers & realtors |
-| **Account Strategist** | Retain and upsell existing commercial clients |
+1. **Leads going cold** — Phone rings while you're on a job. Nobody follows up. Lead books someone else.
+2. **Manual quoting** — Estimating over the phone without seeing the property = underquote (lose money) or overquote (lose the job).
+3. **Scheduling chaos** — Double bookings, missed appointments, confused crews. All managed in a spreadsheet or someone's head.
+4. **Chasing payments** — Invoices go out late, payments slip through cracks, cash flow is unpredictable even when busy.
+5. **No-shows & cancellations** — No automated reminders = expensive gaps in the schedule.
+6. **Customer churn** — No post-service follow-up, no rebooking reminders, no review requests.
+7. **Crew dispatching** — Knowing who is where, handling call-outs, optimizing drive time between jobs.
+8. **Disconnected everything** — Spreadsheets for scheduling, texts for crews, a notebook for invoices. Nothing talks to anything.
 
 ---
 
-## Phase 1: Foundation (Week 1-2) — Stop Losing Leads
+## The Open-Source Stack (Replaces Jobber at $0/month)
 
-The biggest money leak in a cleaning business is leads that never get a response. Fix that first.
+### Minimum Viable Stack — Start Here
 
-### Step 1: Booking Website + Online Quotes
+These 5 repos cover 80% of the pain. All self-hostable with Docker.
 
-**Activate Frontend Developer:**
+| Pain Point | Tool | Repo | Stars |
+|------------|------|------|-------|
+| **Workflow glue (connects everything)** | n8n | `n8n-io/n8n` | 182K+ |
+| **Online booking + scheduling** | Cal.com | `calcom/cal.com` | 41K+ |
+| **Quoting + invoicing + payments** | Invoice Ninja | `invoiceninja/invoiceninja` | 9.6K+ |
+| **Customer communication hub** | Chatwoot | `chatwoot/chatwoot` | 28K+ |
+| **AI chatbot for lead capture + quoting** | Flowise | `FlowiseAI/Flowise` | 51K+ |
 
-```
-Activate Frontend Developer.
+### Scale-Up Stack — Add as You Grow
 
-Build a responsive website for Executive Cleaning of Idaho — a residential
-and commercial cleaning company serving the Boise, Idaho metro area.
-
-Stack: HTML, Tailwind CSS, minimal JS. Mobile-first.
-
-Pages needed:
-1. Home — hero with CTA "Get a Free Quote", services overview, trust signals
-2. Services — Residential, Commercial, Move-In/Move-Out, Deep Clean, Post-Construction
-3. About — company story, team, licensed/bonded/insured badges
-4. Quote Request — form with: name, phone, email, address, service type,
-   square footage, preferred date, special requests
-5. Contact — phone, email, service area map
-
-Form submits to /api/quote-request (we'll wire this up next).
-Include schema.org LocalBusiness structured data.
-Include Google Analytics and Facebook Pixel placeholders.
-```
-
-### Step 2: Automated Quote Response System
-
-**Activate Backend Architect:**
-
-```
-Activate Backend Architect.
-
-Build an automated quote response system for a cleaning company.
-
-When a quote request comes in via the website form:
-1. Save to database (customer name, contact, service details, address, sqft)
-2. Send instant email confirmation: "Thanks [Name], we received your quote
-   request. We'll have your estimate within 2 hours."
-3. Send SMS notification to the owner with quote details
-4. Auto-calculate estimate based on: service type + square footage + frequency
-   (use a configurable pricing table)
-5. Generate PDF quote using a template and email it to the customer
-6. If no response in 48 hours, send automated follow-up email
-7. If no response in 5 days, send final follow-up with 10% discount offer
-
-Tech: Node.js or Python, integrate with:
-- Twilio (SMS notifications)
-- SendGrid or SES (email)
-- Stripe (payment links in quotes)
-- Google Calendar API (scheduling)
-```
-
-### Step 3: Quote & Invoice PDF Generation
-
-**Activate Document Generator:**
-
-```
-Activate Document Generator.
-
-Create PDF templates for a cleaning company called "Executive Cleaning of Idaho":
-
-1. Quote/Estimate PDF:
-   - Company logo, name, contact info header
-   - Customer details
-   - Service breakdown (line items: service type, sqft, frequency, price)
-   - Total with tax
-   - Terms (cancellation policy, payment terms)
-   - "Accept Quote" link/CTA
-   - Valid for 30 days
-
-2. Invoice PDF:
-   - Same header
-   - Invoice number, date, due date
-   - Service performed, date of service, amount
-   - Payment methods: Stripe link, check, Venmo
-   - Late payment terms
-
-3. Cleaning Checklist PDF (per service type):
-   - Room-by-room task checklist
-   - Crew sign-off section
-   - Customer satisfaction sign-off
-
-Use Python with reportlab or weasyprint. Make templates data-driven so they
-auto-populate from the booking system.
-```
+| Pain Point | Tool | Repo | Stars |
+|------------|------|------|-------|
+| **Customer CRM** | Twenty | `twentyhq/twenty` | 43K+ |
+| **Route optimization** | VROOM + OSRM | `VROOM-Project/vroom` + `Project-OSRM/osrm-backend` | 1.7K + 7.6K |
+| **AI phone answering** | LiveKit Agents | `livekit/agents` | 9.9K+ |
+| **Review automation** | Formbricks | `formbricks/formbricks` | 12K+ |
+| **Crew push notifications** | ntfy | `binwiederhier/ntfy` | 29K+ |
+| **Multi-channel notifications** | Novu | `novuhq/novu` | 38K+ |
+| **Email marketing** | Listmonk | `knadh/listmonk` | 19K+ |
+| **Document signing (contracts)** | Documenso | `documenso/documenso` | 12.6K+ |
+| **AI agent builder (advanced)** | Dify | `langgenius/dify` | 135K+ |
+| **Document management** | Paperless-ngx | `paperless-ngx/paperless-ngx` | 37K+ |
 
 ---
 
-## Phase 2: Get Found Online (Week 2-3) — SEO & Local Search
+## How It Maps to Jobber/Housecall Pro
 
-### Step 4: Local SEO
-
-**Activate SEO Specialist:**
-
-```
-Activate SEO Specialist.
-
-Build a local SEO strategy for Executive Cleaning of Idaho.
-Service area: Boise, Meridian, Nampa, Caldwell, Eagle, Star, Kuna, Idaho.
-
-Deliverables:
-1. Google Business Profile optimization checklist
-2. Local keyword map:
-   - Primary: "house cleaning Boise", "commercial cleaning Idaho",
-     "maid service Boise", "office cleaning Boise"
-   - Long-tail: "move out cleaning Boise Idaho", "post construction
-     cleaning Meridian", "deep cleaning service Eagle Idaho"
-   - Map each keyword to a specific page or blog post
-3. On-page SEO for all website pages (title tags, meta descriptions, H1s)
-4. Local citation list: top 30 directories to list the business
-   (Yelp, Angi, Thumbtack, HomeAdvisor, BBB, local Idaho directories)
-5. Blog content calendar: 12 SEO-driven posts
-   Examples: "How Much Does House Cleaning Cost in Boise?",
-   "Move-Out Cleaning Checklist for Idaho Renters",
-   "Why Boise Businesses Are Switching to Professional Office Cleaning"
-6. Review generation strategy (Google reviews are the #1 local ranking factor)
-```
-
-### Step 5: Website Copy
-
-**Activate Content Creator:**
-
-```
-Activate Content Creator.
-
-Write website copy for Executive Cleaning of Idaho.
-Tone: Professional, trustworthy, local. Not corporate. These are real people
-who take pride in their work.
-
-Write:
-1. Homepage hero: headline, subheadline, CTA
-2. Services page: description for each service
-   - Residential Cleaning
-   - Commercial/Office Cleaning
-   - Move-In/Move-Out Cleaning
-   - Deep Cleaning
-   - Post-Construction Cleanup
-3. About page: company story template (fill-in-the-blank for owner details)
-4. 5 Google Business Profile posts (promotional + educational mix)
-5. Email templates:
-   - Quote follow-up (friendly, not pushy)
-   - Booking confirmation
-   - Day-before reminder
-   - Post-service thank you + review request
-   - Win-back email for lapsed customers (90 days no booking)
-```
+| Jobber Feature | Open-Source Replacement |
+|----------------|----------------------|
+| Online booking widget | **Cal.com** — embeddable booking, team scheduling, recurring bookings |
+| Customer CRM | **Twenty** — customer profiles, service history, pipeline view |
+| Quoting/estimating | **Invoice Ninja** + **Flowise** AI agent for auto-pricing |
+| Job scheduling + calendar | **Cal.com** + **Timefold Solver** for optimization |
+| Crew dispatch + notifications | **n8n** + **ntfy** push notifications to crew phones |
+| Route optimization | **VROOM** + **OSRM** — optimal routes for multiple crews |
+| Invoicing + online payments | **Invoice Ninja** — Stripe, PayPal, recurring invoices |
+| SMS/email reminders | **Novu** — unified notification API across channels |
+| Review requests | **Formbricks** — post-service survey, redirect 4-5 star to Google |
+| Customer chat widget | **Chatwoot** + **Typebot** conversational booking flow |
+| AI phone answering | **LiveKit Agents** — voice AI receptionist |
+| Workflow automation | **n8n** — the connective tissue between all tools |
+| Document signing | **Documenso** or **DocuSeal** — digital contracts/waivers |
+| Email marketing | **Listmonk** — newsletters, seasonal promos, win-back campaigns |
+| Website builder | **GrapesJS** (`GrapesJS/grapesjs`, 25K+ stars) |
+| AI business assistant | **Dify** or **Open WebUI** (`open-webui/open-webui`, 129K+ stars) |
 
 ---
 
-## Phase 3: Automate Customer Communication (Week 3-4)
+## The Full Repo List (36 Tools)
 
-### Step 6: Customer Lifecycle Automation
+### AI Agent Frameworks
 
-**Activate Support Responder:**
+| Repo | Stars | What It Does | Cleaning Use Case |
+|------|-------|-------------|-------------------|
+| `langgenius/dify` | 135K+ | Production AI workflow platform, visual builder | AI agent for lead qualification + auto-quoting |
+| `n8n-io/n8n` | 182K+ | Workflow automation, 400+ integrations | Connects everything: booking → invoice → SMS → review |
+| `activepieces/activepieces` | 21K+ | Open-source Zapier alternative | Simpler alternative to n8n for basic automations |
+| `FlowiseAI/Flowise` | 51K+ | Visual AI chatbot builder, no code | Website chatbot: collects rooms/sqft → instant quote |
+| `crewAIInc/crewAI` | 47K+ | Multi-agent orchestration framework | Team of AI agents: lead handler, quoter, scheduler, follow-up |
+| `langchain-ai/langgraph` | 28K+ | Graph-based agent framework | Complex multi-step operations agents |
+| `VRSEN/agency-swarm` | 4.1K+ | Multi-agent orchestration | Virtual office manager with cooperating agents |
+| `firecrawl/firecrawl` | 103K+ | Web scraping API for AI | Scrape real estate listings for leads, monitor competitor pricing |
+| `mastra-ai/mastra` | 22K+ | TypeScript AI agent framework | Node.js-native agent development |
+
+### CRM / Invoicing / Business Management
+
+| Repo | Stars | What It Does | Cleaning Use Case |
+|------|-------|-------------|-------------------|
+| `twentyhq/twenty` | 43K+ | Open-source Salesforce alternative | Customer database, service history, lead pipeline |
+| `frappe/erpnext` | 32K+ | Full ERP suite | Nuclear option: CRM + invoicing + HR + accounting + field service |
+| `odoo/odoo` | 49K+ | Comprehensive business apps | Field Service module for dispatch + time tracking + invoicing |
+| `invoiceninja/invoiceninja` | 9.6K+ | Invoicing, quoting, payments | Quotes → invoices → Stripe payments → recurring billing |
+| `crater-invoice-inc/crater` | 8.3K+ | Simple invoicing | Lightweight alternative to Invoice Ninja |
+| `akaunting/akaunting` | 9.7K+ | Online accounting | Invoicing + expenses + P&L by customer or service type |
+| `InvoicePlane/InvoicePlane` | 3K+ | Basic invoice management | Minimal invoicing for simple operations |
+
+### Communication Automation
+
+| Repo | Stars | What It Does | Cleaning Use Case |
+|------|-------|-------------|-------------------|
+| `chatwoot/chatwoot` | 28K+ | Omnichannel messaging (chat, SMS, email, WhatsApp) | One inbox: website chat + SMS + email + social |
+| `novuhq/novu` | 38K+ | Notification infrastructure API | Trigger: job done → invoice email + SMS review request + owner push |
+| `knadh/listmonk` | 19K+ | Newsletter/mailing list manager | Monthly tips, seasonal promos, win-back campaigns |
+| `binwiederhier/ntfy` | 29K+ | Push notifications via HTTP | "New job: 123 Main St, 2pm" → crew's phone. Dead simple. |
+| `baptisteArno/typebot.io` | 9.8K+ | Visual chatbot builder | Conversational booking: "How many rooms? → Here's your quote!" |
+| `EvolutionAPI/evolution-api` | 7.7K+ | WhatsApp integration API | Automate WhatsApp booking confirmations + reminders |
+| `botpress/botpress` | 14K+ | GPT-powered chatbot platform | Advanced conversational AI for complex customer interactions |
+
+### Booking & Scheduling
+
+| Repo | Stars | What It Does | Cleaning Use Case |
+|------|-------|-------------|-------------------|
+| `calcom/cal.com` | 41K+ | Scheduling infrastructure (Calendly alternative) | Self-book cleaning appointments, team scheduling, recurring bookings |
+| `VROOM-Project/vroom` | 1.7K+ | Vehicle routing optimization | Optimal routes for 2+ crews across 8+ daily jobs |
+| `Project-OSRM/osrm-backend` | 7.6K+ | Driving directions + travel time engine | Powers travel-time calculations between jobs. No Google Maps bills. |
+| `TimefoldAI/timefold-solver` | 1.6K+ | AI scheduling/routing solver | Advanced crew scheduling with skills, availability, travel constraints |
+
+### AI-Powered Operations
+
+| Repo | Stars | What It Does | Cleaning Use Case |
+|------|-------|-------------|-------------------|
+| `emcie-co/parlant` | 17K+ | Conversational control layer for AI agents | AI receptionist with business rules: "minimum $120", "48hr notice for deep cleans" |
+| `livekit/agents` | 9.9K+ | Realtime voice AI agents | AI phone answering: "Thanks for calling Executive Cleaning, how can I help?" |
+| `TEN-framework/ten-framework` | 10K+ | Voice AI agent framework | Alternative voice bot for after-hours call handling |
+| `open-webui/open-webui` | 129K+ | Private AI interface (ChatGPT alternative) | Owner's AI assistant: draft emails, analyze business data, create checklists |
+| `paperless-ngx/paperless-ngx` | 37K+ | Document management with OCR + ML | Digitize contracts, insurance certs, receipts, employee docs |
+| `documenso/documenso` | 12.6K+ | Digital document signing (DocuSign alternative) | Service agreements + cleaning contracts signed before first clean |
+| `docusealco/docuseal` | 11K+ | Document signing + form builder | Fillable estimate forms customers sign off on |
+| `formbricks/formbricks` | 12K+ | Survey + experience management | Post-service: "Rate 1-5" → if 4-5, redirect to Google Reviews |
+| `GrapesJS/grapesjs` | 25K+ | Drag-and-drop web page builder | Build/maintain website without a developer |
+
+---
+
+## Automation Flows (Built with n8n)
+
+### Flow 1: Lead → Quote → Booking (Zero Manual Effort)
 
 ```
-Activate Support Responder.
+Website Typebot chatbot collects: name, address, rooms, sqft, service type
+  → n8n webhook receives form data
+  → AI agent (Flowise) calculates quote based on pricing rules
+  → Invoice Ninja creates estimate PDF
+  → Novu sends quote email + SMS to customer
+  → Twenty CRM creates lead record
+  → If no response in 48hr: n8n triggers follow-up email
+  → If no response in 5 days: n8n sends 10% discount offer
+  → Customer accepts: Cal.com booking link in email
+  → Booking confirmed: n8n notifies crew via ntfy
+```
 
-Design automated customer communication flows for a cleaning company:
+### Flow 2: Job Day (Fully Automated Communication)
 
-Flow 1 — New Lead:
-  Quote request → Instant confirmation → Estimate (2hr) → Follow-up (48hr)
-  → Discount offer (5 days) → Final "still interested?" (10 days)
+```
+Day before job:
+  → n8n checks Cal.com for tomorrow's jobs
+  → Novu sends customer reminder SMS: "Your cleaning is tomorrow at 10am"
+  → ntfy pushes crew schedule for tomorrow
 
-Flow 2 — Booked Customer:
-  Booking confirmed → Day-before reminder (with crew arrival window)
-  → Day-of "crew is on the way" text → Post-service "how did we do?" text
-  → 24hr later: Google review request with direct link
-  → 2 weeks later: "Ready to book your next cleaning?"
+Day of job:
+  → Crew marks "on the way" in Cal.com mobile
+  → n8n triggers SMS to customer: "Your crew is 15 minutes away"
+  → Crew marks "complete" in Cal.com
+  → n8n triggers Invoice Ninja to generate + send invoice with Stripe link
+  → 24 hours later: Formbricks sends satisfaction survey
+  → If rating 4-5: redirect to Google Reviews link
+  → If rating 1-3: alert owner via ntfy for personal follow-up
+```
 
-Flow 3 — Recurring Customer:
-  Monthly reminder 3 days before scheduled cleaning → Confirm/reschedule
-  → Quarterly upsell: "Want to add a deep clean this month?"
-  → Annual thank-you with loyalty discount
+### Flow 3: Customer Retention (Automated Lifecycle)
 
-Flow 4 — Win-Back:
-  90 days no booking → "We miss you" email with 15% off
-  → 120 days → Final outreach
-  → 180 days → Mark inactive, remove from active list
+```
+Recurring customer:
+  → 3 days before scheduled cleaning: n8n sends confirm/reschedule SMS
+  → Quarterly: n8n sends upsell email "Add a deep clean this month? 15% off"
+  → Annual: automated thank-you + loyalty discount
 
-For each flow, write the actual message templates (email + SMS versions).
-Keep SMS under 160 characters. Emails short and scannable.
+Lapsed customer (90 days no booking):
+  → n8n triggers Listmonk "we miss you" email with 15% off
+  → 120 days: final outreach
+  → 180 days: mark inactive in Twenty CRM
+```
+
+### Flow 4: Commercial Outreach (AI-Powered Prospecting)
+
+```
+Weekly:
+  → Firecrawl scrapes Google Maps for new businesses in Boise metro
+  → AI agent (Dify) qualifies prospects: property managers, medical offices, gyms
+  → n8n adds qualified leads to Twenty CRM pipeline
+  → Automated 3-email outreach sequence via Listmonk
+  → Responses route to Chatwoot inbox
+  → Owner converts hot leads using Proposal Strategist agent templates
 ```
 
 ---
 
-## Phase 4: Commercial Sales Automation (Week 4-5)
-
-### Step 7: Commercial Cleaning Proposals
-
-**Activate Proposal Strategist:**
+## Deployment Architecture
 
 ```
-Activate Proposal Strategist.
-
-Create a reusable commercial cleaning proposal template for
-Executive Cleaning of Idaho.
-
-Target clients: office buildings, medical offices, property management
-companies, retail spaces, gyms/fitness centers in the Boise metro area.
-
-Proposal structure:
-1. Executive Summary — why this business should choose us
-2. Understanding Your Needs — customizable section per prospect
-3. Our Approach — cleaning methodology, products (green/eco options),
-   quality assurance (checklists, inspections)
-4. Scope of Work — customizable room-by-room or area-by-area breakdown
-5. Staffing — crew size, background checks, training, insurance
-6. Pricing — per-visit, weekly, monthly options with volume discounts
-7. Why Executive Cleaning — differentiators:
-   - Locally owned, Idaho-based
-   - Licensed, bonded, insured
-   - Background-checked crews
-   - Satisfaction guarantee
-   - Green cleaning options
-8. Case Studies / Testimonials (template format)
-9. Next Steps + Contract Terms
-
-Make the template modular so sections can be swapped per industry
-(medical = HIPAA compliance section, gym = sanitization focus, etc.).
+┌─────────────────────────────────────────────────┐
+│                  CUSTOMER FACING                 │
+├──────────┬──────────┬──────────┬────────────────┤
+│ Website  │ Typebot  │ Cal.com  │ LiveKit Voice  │
+│(GrapesJS)│ Chatbot  │ Booking  │  AI Phone Bot  │
+└────┬─────┴────┬─────┴────┬─────┴───────┬────────┘
+     │          │          │             │
+     └──────────┴──────┬───┴─────────────┘
+                       │
+              ┌────────▼────────┐
+              │      n8n        │
+              │ (workflow glue) │
+              └──┬───┬───┬───┬─┘
+                 │   │   │   │
+    ┌────────────┘   │   │   └──────────────┐
+    │                │   │                  │
+┌───▼───┐    ┌──────▼─┐ │  ┌───────┐  ┌───▼────┐
+│Twenty │    │Invoice │ │  │Novu/  │  │Flowise │
+│  CRM  │    │ Ninja  │ │  │ ntfy  │  │AI Agent│
+└───────┘    └────────┘ │  └───────┘  └────────┘
+                        │
+               ┌────────▼────────┐
+               │    Chatwoot     │
+               │  (unified inbox)│
+               └─────────────────┘
 ```
 
-### Step 8: B2B Outreach Automation
-
-**Activate Outbound Strategist:**
-
-```
-Activate Outbound Strategist.
-
-Build an outbound prospecting system for a commercial cleaning company
-targeting businesses in Boise, Idaho.
-
-Target segments (in priority order):
-1. Property management companies (manage multiple buildings = recurring revenue)
-2. Medical/dental offices (high compliance needs = premium pricing)
-3. Real estate agents (move-out cleans = steady referral stream)
-4. Office parks and coworking spaces
-5. Gyms and fitness centers
-
-For each segment, create:
-- Outreach email sequence (3 emails over 2 weeks)
-- LinkedIn connection message template
-- Phone call script (30-second opener)
-- Value proposition specific to their pain points
-- Objection handling (price, switching costs, "we have someone")
-
-Prospect sourcing:
-- Google Maps scrape of target businesses in Boise metro
-- LinkedIn Sales Navigator search criteria
-- Local business directories and Chamber of Commerce lists
-```
+All services run in Docker on a single $20-40/mo VPS (Hetzner, DigitalOcean, or Railway).
 
 ---
 
-## Phase 5: Marketing Automation (Week 5-6)
+## Implementation Priority
 
-### Step 9: Paid Ads
+### Week 1: Stop the Bleeding (Lead Capture)
+- Deploy **Cal.com** — customers can self-book online immediately
+- Deploy **Typebot** — chatbot on website collects quote requests 24/7
+- Set up **n8n** — auto-send confirmation emails when bookings come in
 
-**Activate PPC Campaign Strategist:**
+### Week 2: Get Paid Faster (Invoicing)
+- Deploy **Invoice Ninja** — auto-generate invoices after each job
+- Connect to **Stripe** — customers pay online via invoice link
+- **n8n** automation: job complete → invoice sent → payment reminder at 48hr
 
-```
-Activate PPC Campaign Strategist.
+### Week 3: Never Forget a Customer (Communication)
+- Deploy **Chatwoot** — one inbox for all customer messages
+- Deploy **Novu** or **ntfy** — automated SMS reminders day before service
+- **n8n** flows: booking reminders, "crew on the way", post-service follow-up
 
-Set up Google Ads campaigns for a local cleaning company in Boise, Idaho.
+### Week 4: Get Reviews on Autopilot
+- Deploy **Formbricks** — post-service satisfaction survey
+- **n8n** flow: 24hr after job → survey → happy customers → Google Review link
+- Set up **Listmonk** — monthly newsletter + seasonal promos
 
-Campaign 1 — Residential (Search):
-- Keywords: house cleaning, maid service, home cleaning, deep cleaning
-- Geo: Boise, Meridian, Eagle, Star, Nampa, Caldwell (25mi radius)
-- Budget: $500-1000/mo
-- Landing page: quote request form
-
-Campaign 2 — Commercial (Search):
-- Keywords: office cleaning, janitorial services, commercial cleaning
-- Geo: same
-- Budget: $300-500/mo
-- Landing page: commercial services page
-
-Campaign 3 — Move-Out (Search, seasonal boost):
-- Keywords: move out cleaning, end of lease cleaning
-- Geo: same
-- Budget: $200-400/mo (increase May-August for peak moving season)
-
-For each campaign:
-- Ad copy (3 responsive search ads per ad group)
-- Negative keyword list
-- Bid strategy recommendation
-- Conversion tracking setup (form submissions, phone calls)
-- Expected CPA targets for cleaning industry
-```
-
-### Step 10: Social Media & Reviews
-
-**Activate Social Media Strategist + Instagram Curator:**
-
-```
-Activate Social Media Strategist.
-
-Create a social media plan for a local cleaning company in Boise, Idaho.
-Platforms: Facebook (primary), Instagram (secondary).
-
-Content calendar — 3 posts per week:
-- Monday: Cleaning tip or hack (educational)
-- Wednesday: Before/after transformation (visual proof)
-- Friday: Team spotlight, customer testimonial, or local Idaho content
-
-Monthly content themes:
-- January: "New Year, Clean Start" deep cleaning push
-- March: Spring cleaning season
-- May-August: Move-out cleaning (peak moving season)
-- October: Pre-holiday cleaning
-- December: Gift certificates
-
-Also create:
-- 10 ready-to-post captions with hashtag sets
-- Facebook review request template (post-service share)
-- Neighborhood Facebook group engagement strategy
-  (Boise, Meridian, Eagle community groups)
-- Google review response templates (positive + negative)
-```
+### Month 2+: Scale
+- **Twenty CRM** — full customer database as you grow past 50 clients
+- **VROOM + OSRM** — route optimization when running 3+ crews
+- **LiveKit Agents** — AI phone answering for after-hours calls
+- **Firecrawl + Dify** — automated commercial lead prospecting
 
 ---
 
-## Phase 6: Dashboard & Tracking (Week 6)
+## Cost Comparison
 
-### Step 11: Business Dashboard
+| | Jobber (Pro) | This Stack (Self-Hosted) |
+|---|---|---|
+| Monthly cost | $169/mo | $20-40/mo (VPS) |
+| Annual cost | $2,028/yr | $240-480/yr |
+| AI phone answering | Not included | LiveKit Agents (free) |
+| AI chatbot | Not included | Flowise/Typebot (free) |
+| Route optimization | Basic | VROOM + OSRM (advanced, free) |
+| Email marketing | Not included | Listmonk (free) |
+| Review automation | Basic | Formbricks (customizable, free) |
+| Document signing | Not included | Documenso (free) |
+| Customization | Limited | Unlimited |
+| Data ownership | Theirs | Yours |
 
-**Activate Analytics Reporter + Finance Tracker:**
-
-```
-Activate Analytics Reporter.
-
-Design a business dashboard for a cleaning company. Data sources:
-website analytics, booking system, invoicing, Google Ads, reviews.
-
-Key metrics to track:
-1. Leads: quote requests this week/month, source breakdown
-2. Conversion: quote-to-booking rate, average time to book
-3. Revenue: this week/month, per service type, recurring vs one-time
-4. Jobs: completed this week, upcoming scheduled, cancellation rate
-5. Customer: total active, new this month, churned, avg lifetime value
-6. Reviews: Google rating, review count, new reviews this week
-7. Marketing: ad spend, cost per lead, cost per booking, ROI by channel
-8. Crew: jobs per crew, average job time, customer ratings per crew
-
-Build with a simple stack: Google Sheets or a lightweight web dashboard.
-Auto-refresh daily. Weekly email summary to the owner.
-```
+**Trade-off:** More setup time upfront, but dramatically lower cost and full control.
 
 ---
 
-## What Gets Automated (Summary)
+## Using Agency Agents with This Stack
 
-| Manual Task Today | Automated With |
-|-------------------|---------------|
-| Answer phone, take quote details | Website form + instant auto-response |
-| Calculate estimates manually | Auto-pricing engine based on sqft + service |
-| Write quotes in Word/email | PDF quote generator, auto-emailed |
-| Forget to follow up on quotes | Automated 48hr/5-day/10-day email sequence |
-| Manually send booking confirmations | Auto-confirm email + SMS + calendar invite |
-| Remember to ask for reviews | Auto-review request 24hr post-service |
-| Post on social media when you remember | Pre-scheduled content calendar |
-| Chase invoices | Auto-invoice with Stripe payment links |
-| Manually track revenue | Real-time business dashboard |
-| Cold call for commercial clients | Automated email outreach sequences |
-| Write proposals from scratch each time | Modular proposal template, auto-filled |
+The agents in this repo (`agency-agents`) serve as the **brains** that configure and optimize each tool:
 
-## NEXUS Mode
+| Agent | What It Does with This Stack |
+|-------|------------------------------|
+| **Backend Architect** | Designs n8n workflows and API integrations between tools |
+| **Frontend Developer** | Builds the website, embeds Cal.com + Typebot widgets |
+| **SEO Specialist** | Optimizes website content for "cleaning services Boise" |
+| **Content Creator** | Writes email templates, chatbot scripts, website copy |
+| **Growth Hacker** | Designs the review funnel, referral program, conversion optimization |
+| **Support Responder** | Designs customer communication flows and templates |
+| **Proposal Strategist** | Creates commercial cleaning proposal templates |
+| **Outbound Strategist** | Designs the Firecrawl → Dify → Listmonk prospecting pipeline |
+| **PPC Campaign Strategist** | Sets up Google Ads campaigns for local search |
+| **Finance Tracker** | Configures Invoice Ninja reporting and job costing |
+| **Analytics Reporter** | Builds business dashboard from n8n + Invoice Ninja data |
+| **Document Generator** | Creates PDF templates for quotes, checklists, contracts |
 
-This is a **NEXUS-Sprint** (4-6 weeks, 16 agents). To kick it all off:
+---
+
+## NEXUS Activation
 
 ```
 Activate Agents Orchestrator in NEXUS-Sprint mode.
 
-Project: Executive Cleaning of Idaho — Business Automation
-Goal: Automate lead capture, quoting, customer communication, invoicing,
-marketing, and commercial sales for a cleaning company in Boise, Idaho.
+Project: Executive Cleaning of Idaho — Operations Automation
+Goal: Deploy open-source stack replacing Jobber. Automate lead capture,
+booking, quoting, invoicing, customer communication, crew dispatch,
+review generation, and commercial prospecting.
+
+Tech stack: n8n, Cal.com, Invoice Ninja, Chatwoot, Flowise, Typebot,
+Novu, ntfy, Formbricks, Listmonk, Twenty CRM, VROOM, LiveKit Agents.
 
 Sprint team:
-- PM: Senior Project Manager, Sprint Prioritizer
-- Engineering: Frontend Developer, Backend Architect, DevOps Automator
-- Content: Content Creator, SEO Specialist
+- PM: Senior Project Manager
+- Engineering: Backend Architect, Frontend Developer, DevOps Automator
+- AI: AI Engineer (Flowise chatbot + LiveKit voice bot)
+- Content: Content Creator (email templates, chatbot scripts, website copy)
 - Sales: Proposal Strategist, Outbound Strategist
-- Marketing: Growth Hacker, PPC Campaign Strategist, Social Media Strategist,
-  Instagram Curator
-- Support: Support Responder, Analytics Reporter, Finance Tracker
-- Docs: Document Generator
+- Marketing: SEO Specialist, Growth Hacker, PPC Campaign Strategist
+- Support: Support Responder (communication flow design)
+- Operations: Finance Tracker, Analytics Reporter
 
-Begin at Phase 1: Build booking website + automated quote system.
-Quality gate: live website accepting quote requests before moving to Phase 2.
+Phase 1 (Week 1): Deploy Cal.com + Typebot + n8n. Live booking on website.
+Phase 2 (Week 2): Deploy Invoice Ninja + Stripe. Automated invoicing.
+Phase 3 (Week 3): Deploy Chatwoot + Novu. Automated customer comms.
+Phase 4 (Week 4): Deploy Formbricks + Listmonk. Review + retention automation.
+Phase 5 (Month 2): Deploy Twenty CRM + VROOM + LiveKit. Scale operations.
+
+Quality gate: Each phase must be live and processing real data before advancing.
 ```
-
----
-
-## Key Patterns
-
-1. **Fix the leak first**: Automated quote response stops losing leads on day one
-2. **Revenue before polish**: Get bookings flowing before optimizing social media
-3. **Recurring revenue focus**: Commercial contracts + recurring residential = stability
-4. **Reviews compound**: Every automated review request builds the moat competitors can't buy
-5. **Owner's time is the bottleneck**: Every automation gives back hours to the owner
