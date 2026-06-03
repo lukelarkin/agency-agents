@@ -1,138 +1,110 @@
-# Quick Start Guide
+# Quick Start — Your First Cascade
 
-> Get your first system running in under 60 minutes. No fluff, just steps.
-
----
-
-## Before You Start (2 minutes)
-
-1. Open an AI chat tool (Claude.ai, ChatGPT, or similar)
-2. Have a text editor ready (Google Docs, Notion, Notes app — anything)
-3. Pick your starting system below
+> 60 minutes from now, you'll have a full week of content and understand how the architecture works. Start here.
 
 ---
 
-## Pick Your Starting System
+## Before You Start (2 min)
 
-| If your biggest problem is... | Start with | Time to first result |
-|------------------------------|-----------|---------------------|
-| "I spend all week making content" | System 1: Content Engine | 45 minutes |
-| "Onboarding clients is a mess" | System 2: Client Onboarding | 30 minutes |
-| "Proposals take me 3+ hours" | System 3: Proposal Generator | 30 minutes |
-| "I have no idea if I'm growing" | System 4: Weekly Review | 20 minutes |
-| "I never follow up with leads" | System 5: Lead Follow-Up | 30 minutes |
-
-**Not sure?** Start with System 1 (Content Engine). It has the most immediate, visible impact.
+1. Open an AI chat tool (Claude, ChatGPT, or similar)
+2. Have a text editor ready for saving outputs
+3. You're starting with the **Content Cascade** — it teaches the methodology fastest
 
 ---
 
-## Speed Run: System 1 — Content Engine
+## Step 1: Read the Architecture (10 min)
 
-### Step 1: Create Your Content DNA (20 min)
+Skim `cascades/01-content-cascade.md`. Understand the five stages:
 
-1. Open `prompts/content-engine-prompts.md`
-2. Find **Prompt Chain #1: Business Voice Extraction**
-3. Copy the prompt into your AI tool
-4. Fill in the [bracketed sections] with:
-   - 3 examples of content you've written
-   - 5 topics you want to be known for
-   - Description of your target audience
-5. Run the prompt
-6. Save the output as "My Content DNA" — you'll use this everywhere
+```
+CAPTURE → AMPLIFY → VALIDATE → DEPLOY → OPTIMIZE
+```
 
-### Step 2: Generate a Week of Content (25 min)
-
-1. Think of ONE thing that happened in your business recently
-2. Run **Prompt Chain #2** with that one idea → get your content seed
-3. Run **Prompt Chain #3** with seed + Content DNA → get 5 social posts
-4. Run **Prompt Chain #4** with seed + Content DNA → get your email newsletter
-5. Run **Prompt Chain #5** with seed + email → get your blog post
-
-### Step 3: Schedule It (10 min)
-
-1. Open `templates/content-calendar-template.md` for the posting schedule
-2. Copy your posts into your scheduling tool (or just save as drafts)
-3. Schedule your email newsletter
-4. Publish or schedule your blog post
-
-**Done.** You just created a full week of content in under an hour.
+Each stage's output is the next stage's input. The Optimize stage feeds back to Capture. That's the cycle.
 
 ---
 
-## Speed Run: System 2 — Client Onboarding
+## Step 2: Create Your Content DNA (20 min)
 
-### Step 1: Set Up Your Intake Form (15 min)
+This is your voice substrate — the living document that makes all AI output sound like you.
 
-1. Open `templates/client-intake-form.md`
-2. Customize the questions for your service
-3. Create a Google Form (or Typeform, or just email the questions)
+1. Open `prompts/content-cascade-prompts.md`
+2. Find **Stage 01a — Content DNA Builder**
+3. Gather 3 examples of content you've written that feel authentically "you"
+4. Copy the prompt, fill in your details, run it
+5. Save the output as your Content DNA — you'll paste this into every future prompt
 
-### Step 2: Build Your Welcome Email (15 min)
-
-1. Open `prompts/onboarding-prompts.md`
-2. Run **Prompt Chain #2: Welcome Sequence Builder**
-3. Save the 5 emails as templates in your email tool
-
-**Done.** Next new client gets the premium onboarding experience.
+**This substrate will evolve.** Week 1 DNA is rough. By week 12, it's a precision instrument — because the Optimize stage refines it every Friday.
 
 ---
 
-## Speed Run: System 3 — Proposal Generator
+## Step 3: Run Your First Cycle (30 min)
 
-### Step 1: Build Your Framework (15 min)
+### Stage 01 · Capture (5 min)
+Think of one thing that happened in your business this week — a client win, a mistake, a pattern, a question.
 
-1. Open `prompts/proposal-prompts.md`
-2. Run **Prompt Chain #1: Proposal Framework Builder** with your service details
-3. Save the output as your master framework
+Open the **Stage 01 prompt** in `prompts/content-cascade-prompts.md`. Paste your Content DNA + your one-sentence business event. Run it.
 
-### Step 2: Generate a Test Proposal (15 min)
+You now have a **Content Substrate** — structured signal that feeds everything downstream.
 
-1. Think of a recent prospect (or make one up)
-2. Run **Prompt Chain #2: Custom Proposal Generator**
-3. Run **Prompt Chain #4: Proposal Quality Reviewer** to check it
+**Stage gate:** Check the TENSION field. If there's no tension (nothing surprising or contrarian), pick a different event.
 
-**Done.** Your next real proposal will take 10 minutes.
+### Stage 02 · Amplify (10 min)
+Open the **Stage 02 prompt**. Paste your Content DNA + Content Substrate. Run it.
 
----
+You now have 5 platform-native drafts: LinkedIn (2), Instagram, X/Twitter thread, email newsletter, and a blog post. All from one business event.
 
-## Speed Run: System 4 — Weekly Review
+### Stage 03 · Validate (10 min)
+Open the **Stage 03 prompt**. Paste your Content DNA + all drafts. Run it.
 
-### Step 1: Build Your Scorecard (20 min)
+The quality gate checks voice fidelity, platform nativity, hook strength, slop detection, and CTA clarity. Failing sections get auto-repaired.
 
-1. Open `prompts/review-prompts.md`
-2. Run **Prompt Chain #1: CEO Scorecard Builder** with your business details
-3. Open `templates/weekly-review-template.md` and fill in this week's numbers
-4. Run **Prompt Chain #2: Weekly Review Analyzer** with your numbers
+**Cofactor checkpoint:** Review the validated drafts. Your job is approval, not editing.
 
-**Done.** You now have more clarity about your business than most agency owners get in a month.
+### Stage 04 · Deploy (5 min)
+Schedule or publish. The creative work is done.
 
 ---
 
-## Speed Run: System 5 — Lead Follow-Up
+## Step 4: Close the Loop — Friday (15 min)
 
-### Step 1: Set Up Tracking (15 min)
+### Stage 05 · Optimize
+Gather your engagement numbers from the week. Open the **Stage 05 prompt**. Paste your Content DNA + Content Substrate + performance data.
 
-1. Open `prompts/follow-up-prompts.md`
-2. Run **Prompt Chain #1: Lead Tracker Setup**
-3. List every open lead you can think of in the tracker
+The cascade analyzes what worked, what didn't, and produces:
+- Specific updates to your Content DNA
+- Hook library additions
+- Angle preference adjustments
+- Recommended direction for next week's Capture
 
-### Step 2: Create Your First Sequence (15 min)
-
-1. Run **Prompt Chain #2: Follow-Up Sequence Builder**
-2. Pick your hottest lead
-3. Run **Prompt Chain #3: Follow-Up Personalizer** for that lead
-4. Send the first follow-up email
-
-**Done.** You're already doing more follow-up than 90% of your competitors.
+**Save the updated Content DNA.** Next Monday, you'll use the refined version. This is the compounding effect — week 2 starts with better substrate than week 1.
 
 ---
 
 ## What's Next
 
-After your first system is running:
+After your first Content Cascade cycle:
 
-1. Use it for one full week
-2. Then add the next system (see `bonuses/30-day-implementation-plan.md` for the recommended order)
-3. Within 30 days, all 5 systems will be running and you'll have a complete AI-powered business operating system
+- **Week 2:** Run the Content Cascade again with your updated DNA. Notice the improvement.
+- **Week 3:** Add the Follow-Up Cascade (`cascades/05-follow-up-cascade.md`) — your content becomes value-add material for lead sequences.
+- **Week 4:** Add the Review Cascade (`cascades/04-review-cascade.md`) — start tracking your numbers and making data-informed decisions.
+- **When you close a deal:** Add the Proposal Cascade (`cascades/03-proposal-cascade.md`) and Onboarding Cascade (`cascades/02-onboarding-cascade.md`).
 
-**Questions?** Check the full guide for your system in `systems/` or the FAQ in `README.md`.
+See `bonuses/30-day-implementation-plan.md` for the full day-by-day schedule.
+
+---
+
+## The Compound Effect
+
+| Week | What Happens |
+|------|-------------|
+| 1 | First cycle. Content DNA is rough. Output is good, not great. |
+| 2–3 | Optimize stage refines your voice. Hooks get sharper. |
+| 4–6 | Feedback data accumulates. You know which angles work. |
+| 7–9 | The cascade is tuned. 60 minutes produces better content than 8 hours used to. |
+| 10–12 | Compounding kicks in. Output is recognizably yours. Leads increase. |
+
+A prompt kit gives you the same output on day 90 as day 1.
+A cascade gives you output on day 90 that day 1 couldn't have produced.
+
+That's the architecture.

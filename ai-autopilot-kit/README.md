@@ -1,35 +1,42 @@
-# The AI Autopilot Kit for Agency Owners
+# The AI Autopilot Kit
 
-> 5 AI-powered systems that save agency owners 15+ hours/week and add $3K–$10K/month in revenue. Copy-paste prompt chains, plug-and-play templates, and step-by-step implementation guides.
+### Cascade Kinetics™ for Agency Owners & Consultants
 
----
-
-## What's Inside
-
-This kit contains **5 complete business systems**, each with:
-- A step-by-step system guide (the strategy)
-- Copy-paste prompt chains (the execution)
-- Plug-and-play templates (the structure)
-
-### The 5 Systems
-
-| # | System | Time Saved | Revenue Impact |
-|---|--------|-----------|---------------|
-| 1 | **The Weekly Content Engine** | 7+ hrs/week | More leads from content |
-| 2 | **Automated Client Onboarding** | 2+ hrs/client | Professional first impression |
-| 3 | **The 10-Minute Proposal Generator** | 3.5 hrs/proposal | Higher win rate |
-| 4 | **CEO Weekly Review Dashboard** | Better decisions | $1K–$5K/month in saved mistakes |
-| 5 | **The Lead Follow-Up Machine** | 2.5 hrs/week | $2K+/month in recovered deals |
-
-**Total estimated impact:** 15–25 hours/week saved + $3,000–$10,000/month in revenue.
+> Most AI kits give you prompts with brackets. You fill them in, get output, repeat. The output on day 90 is the same quality as day 1.
+>
+> This kit builds **cascades** — cyclical systems with feedback loops, stage gates, and substrates that evolve every time you run them. The system on day 90 is unrecognizable from day 1.
 
 ---
 
-## Quick Start
+## The Five Cascades
 
-**New here?** Read `00-QUICK-START.md` — you'll have your first system running in under an hour.
+| # | Cascade | What It Does | Time |
+|---|---------|-------------|------|
+| 01 | **Content** | One insight → five platform-native outputs. Feedback refines your voice weekly. | 60 min/week |
+| 02 | **Onboarding** | Client signs → five parallel outputs trigger. Each engagement improves the next. | 35 min/client |
+| 03 | **Proposal** | Discovery call → validated proposal in 90 minutes. Win/loss data refines the framework. | 40 min/proposal |
+| 04 | **Review** | The meta-cascade. Processes signals from all other cascades every Friday. | 30 min/week |
+| 05 | **Follow-Up** | Personalized sequences with slop gates. Response data improves sequences monthly. | 15 min/day |
 
-**Already familiar?** Jump to any system in `systems/` and its matching prompt file in `prompts/`.
+---
+
+## How Cascades Work
+
+Every cascade follows five stages:
+
+```
+CAPTURE → AMPLIFY → VALIDATE → DEPLOY → OPTIMIZE
+                                            ↓
+                              (feedback loops back to CAPTURE)
+```
+
+- **Capture:** Extract signal from noise into structured substrate
+- **Amplify:** One substrate → many platform-native outputs (not copies)
+- **Validate:** Stage gates catch slop, auto-repair failures, kill bad output
+- **Deploy:** Ship. The creative work is done upstream.
+- **Optimize:** Performance data feeds back to refine upstream substrates
+
+Read `methodology/cascade-kinetics.md` for the full framework.
 
 ---
 
@@ -38,21 +45,27 @@ This kit contains **5 complete business systems**, each with:
 ```
 ai-autopilot-kit/
 ├── README.md                          ← You are here
-├── 00-QUICK-START.md                  ← Start here (15-minute setup)
+├── 00-QUICK-START.md                  ← Start here
 │
-├── systems/                           ← Strategy guides (the "what" and "why")
-│   ├── 01-content-engine.md
-│   ├── 02-client-onboarding.md
-│   ├── 03-proposal-generator.md
-│   ├── 04-weekly-review.md
-│   └── 05-lead-follow-up.md
+├── methodology/
+│   └── cascade-kinetics.md            ← The full Cascade Kinetics framework
 │
-├── prompts/                           ← Copy-paste prompt chains (the "how")
-│   ├── content-engine-prompts.md      (15 prompt chains)
-│   ├── onboarding-prompts.md          (8 prompt chains)
-│   ├── proposal-prompts.md            (8 prompt chains)
-│   ├── review-prompts.md              (6 prompt chains)
-│   └── follow-up-prompts.md          (10 prompt chains)
+├── cascades/                          ← Architecture guides (the "what" and "why")
+│   ├── 01-content-cascade.md
+│   ├── 02-onboarding-cascade.md
+│   ├── 03-proposal-cascade.md
+│   ├── 04-review-cascade.md
+│   └── 05-follow-up-cascade.md
+│
+├── prompts/                           ← Stage prompts (the "how")
+│   ├── content-cascade-prompts.md
+│   ├── onboarding-cascade-prompts.md
+│   ├── proposal-cascade-prompts.md
+│   ├── review-cascade-prompts.md
+│   └── follow-up-cascade-prompts.md
+│
+├── substrates/                        ← Living documents that evolve with use
+│   └── (created when you run the cascades)
 │
 ├── templates/                         ← Plug-and-play documents
 │   ├── client-intake-form.md
@@ -60,69 +73,45 @@ ai-autopilot-kit/
 │   ├── proposal-template.md
 │   ├── weekly-review-template.md
 │   └── email-sequences/
-│       ├── welcome-sequence.md        (5 emails)
-│       ├── nurture-sequence.md        (7 emails)
-│       └── re-engagement-sequence.md  (3 emails)
+│       ├── welcome-sequence.md
+│       ├── nurture-sequence.md
+│       └── re-engagement-sequence.md
 │
 ├── dashboard/
-│   └── index.html                     ← Interactive metrics dashboard
+│   └── index.html                     ← Interactive dashboard + prompt generator
 │
 ├── sales-page/
-│   └── index.html                     ← Sales page for the kit
+│   └── index.html                     ← Sales page (Larkin Systems branding)
 │
 ├── bonuses/
-│   ├── roi-calculator.md              ← Calculate your personal ROI
-│   ├── ai-tool-stack-guide.md         ← Recommended tools by budget
-│   └── 30-day-implementation-plan.md  ← Day-by-day setup plan
+│   ├── roi-calculator.md
+│   ├── ai-tool-stack-guide.md
+│   └── 30-day-implementation-plan.md
 │
 ├── launch/
-│   └── distribution-plan.md           ← Marketing and launch strategy
+│   └── distribution-plan.md
 │
-└── package.sh                         ← Build script for distribution
+└── package.sh
 ```
 
 ---
 
-## How to Use This Kit
+## Quick Start
 
-### Option 1: Follow the 30-Day Plan (Recommended)
-Open `bonuses/30-day-implementation-plan.md` and follow day by day. One system per week, 30–60 minutes per day.
+1. Read `methodology/cascade-kinetics.md` (10 min) — understand the architecture
+2. Open `cascades/01-content-cascade.md` — start with the Content Cascade
+3. Run the Stage 01a prompt from `prompts/content-cascade-prompts.md` to create your Content DNA
+4. Run Stages 01–04 to produce your first week of content
+5. On Friday, run Stage 05 with your engagement data — watch the cascade learn
 
-### Option 2: Start With Your Biggest Pain Point
-- Struggling with content? → Start with System 1
-- Onboarding is chaos? → Start with System 2
-- Proposals take forever? → Start with System 3
-- No visibility into your business? → Start with System 4
-- Leads falling through cracks? → Start with System 5
-
-### Option 3: Set Up Everything at Once (Advanced)
-If you have a free afternoon, you can set up the foundations for all 5 systems in about 3 hours. See `00-QUICK-START.md` for the speed-run version.
+See `00-QUICK-START.md` for the full walkthrough.
 
 ---
 
-## What You Need
+## The Key Difference
 
-- **An AI tool:** ChatGPT (free or Plus), Claude (free or Pro), or any AI chat tool
-- **30–60 minutes per day** for the first week
-- **A willingness to run the prompts exactly as written** (tweak after you've tested)
+**Prompt kits:** Static. Fill in brackets. Same output forever. No feedback. No compounding.
 
-See `bonuses/ai-tool-stack-guide.md` for complete tool recommendations by budget level.
+**Cascade Kinetics:** Each prompt's output is the next prompt's input (substrate channeling). Performance data flows back upstream (feedback inhibition). Bad output gets caught and repaired before you see it (stage gates). The system learns from what shipped.
 
----
-
-## FAQ
-
-**Q: Which AI tool should I use?**
-Any modern AI chat tool works. We recommend Claude for writing-heavy tasks (content, proposals) and ChatGPT for analysis tasks (reviews, data). See the tool stack guide for details.
-
-**Q: How long before I see results?**
-Day 1. The content engine gives you a full week of content in your first session. Proposals take 10 minutes after your first setup. The compounding effects (better follow-up, better decisions) build over 30–90 days.
-
-**Q: Will the AI output sound like me?**
-Yes — if you run the Business Voice Extraction prompt (System 1, Step 1) properly. That prompt creates your "Content DNA" that makes all outputs match your voice and style.
-
-**Q: I only have 2 clients. Is this for me?**
-The systems work at any scale. If you have fewer clients, start with Systems 1 (content) and 5 (follow-up) to generate more leads. Add Systems 2–4 as you grow.
-
-**Q: Can I customize the prompts?**
-Yes, after you've tested them as-is. Run each prompt chain exactly as written first, then adjust based on your results.
+The 100th run is structurally better than the 1st — because the substrates evolved through 99 cycles of real-world feedback.
