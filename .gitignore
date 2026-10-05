@@ -86,3 +86,9 @@ integrations/vibe/agents/
 integrations/vibe/prompts/
 integrations/zcode/agents/
 graphify-out/
+
+# Local secrets and per-user Claude Code overrides
+.env
+.env.*
+!.env.example
+.claude/settings.local.json
