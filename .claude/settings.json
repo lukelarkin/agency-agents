@@ -1,0 +1,13 @@
+{
+  "extraKnownMarketplaces": {
+    "brag": {
+      "source": {
+        "source": "github",
+        "repo": "lukelarkin/brag"
+      }
+    }
+  },
+  "enabledPlugins": {
+    "brag@brag": true
+  }
+}
