@@ -28,8 +28,9 @@ JSON="divisions.json"
 # integrations/ is convert.sh's OUTPUT tree (per-tool conversions written back
 # into the repo), not a source-agent category. strategy/ holds playbooks and
 # runbooks (no agent frontmatter), not agents. Neither is a division — they must
-# never be scanned as source-agent categories.
-NON_DIVISION_DIRS=(examples scripts integrations strategy)
+# never be scanned as source-agent categories. brag-output/ is the /brag
+# launch-video output (plan, composition, render), not agents.
+NON_DIVISION_DIRS=(examples scripts integrations strategy brag-output)
 
 errors=0
 fail() { echo "ERROR $*"; errors=$((errors + 1)); }
