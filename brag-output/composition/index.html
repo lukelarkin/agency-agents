@@ -1,0 +1,407 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>Larkin Systems — brag</title>
+    <script src="assets/vendor/gsap.min.js"></script>
+    <script src="assets/audio-data.js"></script>
+    <style>
+      @font-face { font-family: "Geist"; font-weight: 400; src: url("assets/fonts/Geist-Regular.woff2") format("woff2"); }
+      @font-face { font-family: "Geist"; font-weight: 500; src: url("assets/fonts/Geist-Medium.woff2") format("woff2"); }
+      @font-face { font-family: "Geist"; font-weight: 600; src: url("assets/fonts/Geist-SemiBold.woff2") format("woff2"); }
+      @font-face { font-family: "Geist Mono"; font-weight: 400; src: url("assets/fonts/GeistMono-Regular.woff2") format("woff2"); }
+      @font-face { font-family: "Geist Mono"; font-weight: 500; src: url("assets/fonts/GeistMono-Medium.woff2") format("woff2"); }
+
+      :root {
+        --bg: #0B0B0D;
+        --surface: #141416;
+        --surface-2: #1A1A1D;
+        --border: #1E1E22;
+        --border-video: #2A2A2F;
+        --text: #EDEDE7;
+        --text-muted: #7A7A7F;
+        --text-muted-lift: #9A9AA0;
+        --accent: #D4A574;
+        --accent-hover: #E8B98A;
+        --pad-x: 160px;
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 100%; height: 100%; overflow: hidden; background: var(--bg); }
+      body {
+        color: var(--text);
+        font-family: "Geist", system-ui, sans-serif;
+        font-weight: 400;
+        -webkit-font-smoothing: antialiased;
+      }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; background: var(--bg); }
+      .clip { position: absolute; inset: 0; overflow: hidden; }
+      .inner { position: absolute; inset: 0; }
+
+      /* ---- persistent background: the site's drifting copper glows ---- */
+      #bg { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+      .glow { position: absolute; inset: -15%; will-change: transform, opacity; }
+      #glow-a { background: radial-gradient(ellipse at 70% 30%, rgba(212,165,116,0.22) 0%, rgba(11,11,13,0) 55%); }
+      #glow-b { background: radial-gradient(ellipse at 20% 85%, rgba(212,165,116,0.14) 0%, rgba(11,11,13,0) 50%); }
+      #grain {
+        position: absolute; inset: 0; opacity: 0.05;
+        background-image: repeating-linear-gradient(0deg, rgba(237,237,231,0.6) 0 1px, transparent 1px 3px);
+        mix-blend-mode: overlay;
+      }
+      .scene { z-index: 1; }
+
+      /* ---- shared type ---- */
+      .eyebrow {
+        font-size: 24px; letter-spacing: 0.12em; text-transform: uppercase;
+        color: var(--text-muted-lift); font-weight: 500;
+      }
+      .mono-label {
+        font-family: "Geist Mono", ui-monospace, monospace;
+        font-size: 22px; letter-spacing: 0.18em; text-transform: uppercase;
+        color: var(--text-muted-lift); font-weight: 500;
+      }
+      .display { font-weight: 600; letter-spacing: -0.025em; line-height: 1.02; color: var(--text); }
+      .mask { display: block; overflow: hidden; padding-bottom: 0.12em; margin-bottom: -0.12em; }
+      .mask > .line { display: block; will-change: transform; }
+      .btn-primary {
+        display: inline-flex; align-items: center; justify-content: center;
+        background: var(--accent); color: var(--bg);
+        font-weight: 600; font-size: 30px; letter-spacing: -0.01em;
+        padding: 30px 56px; border-radius: 8px; white-space: nowrap;
+      }
+      .btn-outline {
+        display: inline-flex; align-items: center; gap: 12px;
+        color: var(--text-muted-lift); font-weight: 500; font-size: 22px; letter-spacing: 0.02em;
+        padding: 16px 26px; border-radius: 6px; border: 2px solid var(--border-video);
+        white-space: nowrap;
+      }
+
+      /* ---- scene 1: hero ---- */
+      #hero-content { position: absolute; left: var(--pad-x); right: var(--pad-x); top: 240px; }
+      #hero-eyebrow { opacity: 0; }
+      #hero-h1 { font-size: 108px; margin-top: 40px; max-width: 1600px; }
+      #hero-btn { margin-top: 64px; opacity: 0; }
+      #hero-signal { position: absolute; left: var(--pad-x); right: var(--pad-x); bottom: 56px; }
+      #hero-signal svg { width: 100%; height: auto; display: block; }
+      #hero-signal .draw { stroke-dasharray: 1; stroke-dashoffset: 1; }
+      #hero-signal .pkt { opacity: 0; }
+
+      /* ---- scene 2: proof strip ---- */
+      #proof-inner { display: flex; align-items: center; }
+      #proof-band {
+        position: relative; width: 100%;
+        background: var(--surface);
+        border-top: 2px solid var(--border-video); border-bottom: 2px solid var(--border-video);
+        padding: 120px var(--pad-x);
+        will-change: transform, opacity;
+      }
+      .proof-grid { display: grid; grid-template-columns: repeat(4, 1fr); }
+      .proof-cell { padding: 0 56px; border-left: 2px solid var(--border-video); opacity: 0; }
+      .proof-cell:first-child { border-left: 0; padding-left: 0; }
+      .proof-num {
+        font-family: "Geist Mono", ui-monospace, monospace;
+        font-size: 128px; font-weight: 500; letter-spacing: -0.02em; line-height: 1;
+        color: var(--text); font-variant-numeric: tabular-nums; margin-bottom: 28px;
+        white-space: nowrap;
+      }
+      .proof-num .suffix { color: var(--text-muted-lift); }
+      .proof-label { font-size: 26px; color: var(--text-muted-lift); line-height: 1.4; max-width: 18ch; }
+
+      /* ---- scene 3: work tiles ---- */
+      #work-content { position: absolute; left: var(--pad-x); right: var(--pad-x); top: 150px; }
+      #work-eyebrow { opacity: 0; }
+      #work-h2 { font-size: 84px; margin-top: 28px; }
+      #work-grid {
+        margin-top: 72px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;
+        background: var(--border-video); border: 2px solid var(--border-video); border-radius: 10px; overflow: hidden;
+      }
+      .work-tile {
+        background: var(--surface); padding: 44px 40px 40px; min-height: 480px;
+        display: flex; flex-direction: column; position: relative; opacity: 0;
+        will-change: transform, opacity;
+      }
+      .work-tile--featured::before {
+        content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--accent);
+      }
+      .work-tile__head { display: flex; justify-content: space-between; align-items: baseline; gap: 20px; margin-bottom: 30px; }
+      .work-tile__head .mono-label { font-size: 19px; letter-spacing: 0.12em; }
+      .work-tile--featured .work-tile__head { flex-direction: column-reverse; align-items: flex-start; gap: 16px; }
+      .work-tile__chip {
+        display: inline-flex; align-items: center; gap: 10px; white-space: nowrap;
+        font-family: "Geist Mono", ui-monospace, monospace; font-size: 17px; letter-spacing: 0.18em;
+        text-transform: uppercase; color: var(--text-muted-lift); font-weight: 500;
+      }
+      .work-tile__chip::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
+      .work-tile__num { font-family: "Geist Mono", ui-monospace, monospace; font-size: 17px; letter-spacing: 0.18em; color: var(--text-muted-lift); }
+      .work-tile p { font-size: 25px; line-height: 1.5; color: var(--text); flex: 1; }
+      .work-tile .btn-outline { margin-top: 36px; align-self: flex-start; }
+
+      /* ---- scene 4: insight ---- */
+      #insight-content { position: absolute; left: var(--pad-x); right: var(--pad-x); top: 300px; }
+      #insight-hairline { width: 96px; height: 3px; background: var(--accent); margin-bottom: 56px; transform-origin: left; }
+      #insight-h2 { font-size: 118px; max-width: 1500px; }
+      .accent-word { color: var(--accent); position: relative; display: inline-block; }
+      .accent-word .underline {
+        position: absolute; left: 0; right: 0; bottom: 0.02em; height: 4px; background: var(--accent);
+        transform-origin: left; display: block;
+      }
+      #insight-attr { margin-top: 64px; opacity: 0; }
+
+      /* ---- scene 5: the call ---- */
+      #cta-content { position: absolute; left: var(--pad-x); right: var(--pad-x); top: 280px; }
+      #cta-h2 { font-size: 96px; max-width: 1500px; }
+      #cta-btn { margin-top: 72px; opacity: 0; }
+
+      /* ---- scene 6: lockup ---- */
+      #lock-content { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+      #lock-mark { font-size: 132px; opacity: 0; }
+      #lock-sub { margin-top: 40px; opacity: 0; }
+      #lock-url { margin-top: 28px; font-family: "Geist Mono", ui-monospace, monospace; font-size: 30px; letter-spacing: 0.06em; color: var(--accent); font-weight: 500; opacity: 0; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="24.5" data-width="1920" data-height="1080">
+      <!-- persistent background (untimed) -->
+      <div id="bg" data-layout-ignore>
+        <div id="glow-a" class="glow"></div>
+        <div id="glow-b" class="glow"></div>
+        <div id="grain"></div>
+      </div>
+
+      <!-- Scene 1: hero -->
+      <section id="s-hero" class="clip scene" data-start="0" data-duration="7" data-track-index="1">
+        <div class="inner" id="hero-inner">
+          <div id="hero-content">
+            <span id="hero-eyebrow" class="eyebrow">Larkin Systems</span>
+            <h1 id="hero-h1" class="display">
+              <span class="mask" data-layout-allow-overflow><span class="line" id="hero-l1">Not another AI demo.</span></span>
+              <span class="mask" data-layout-allow-overflow><span class="line" id="hero-l2">Operations systems that ship.</span></span>
+            </h1>
+            <div><span id="hero-btn" class="btn-primary">Book the diagnostic</span></div>
+          </div>
+          <div id="hero-signal" aria-hidden="true" data-layout-ignore>
+            <svg viewBox="0 0 1200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path class="draw" id="sig-a" d="M 20 20 C 220 20, 320 84, 480 84" pathLength="1" stroke="#D4A574" stroke-opacity="0.35" stroke-width="1.5" />
+              <path class="draw" id="sig-b" d="M 20 52 C 200 52, 280 84, 420 84" pathLength="1" stroke="#D4A574" stroke-opacity="0.35" stroke-width="1.5" />
+              <path class="draw" id="sig-c" d="M 20 84 H 1180" pathLength="1" stroke="#D4A574" stroke-opacity="0.5" stroke-width="1.5" />
+              <polygon id="hex-1" points="514,74 526,74 532,84 526,94 514,94 508,84" stroke="#D4A574" stroke-opacity="0.7" stroke-width="1.5" fill="none" />
+              <polygon id="hex-2" points="754,74 766,74 772,84 766,94 754,94 748,84" stroke="#D4A574" stroke-opacity="0.7" stroke-width="1.5" fill="none" />
+              <polygon id="hex-3" points="994,74 1006,74 1012,84 1006,94 994,94 988,84" stroke="#D4A574" stroke-opacity="0.7" stroke-width="1.5" fill="none" />
+              <circle class="pkt" id="pkt-1" r="4" cx="20" cy="84" fill="#D4A574" />
+              <circle class="pkt" id="pkt-2" r="4" cx="20" cy="84" fill="#D4A574" />
+            </svg>
+          </div>
+        </div>
+      </section>
+
+      <!-- Scene 2: proof strip -->
+      <section id="s-proof" class="clip scene" data-start="7" data-duration="4.5" data-track-index="1">
+        <div class="inner" id="proof-inner">
+          <div id="proof-band">
+            <div class="proof-grid">
+              <div class="proof-cell" id="pc-1">
+                <div class="proof-num"><span class="n" id="pn-1">0</span><span class="suffix">+</span></div>
+                <p class="proof-label">production systems shipped</p>
+              </div>
+              <div class="proof-cell" id="pc-2">
+                <div class="proof-num"><span class="n" id="pn-2">0</span><span class="suffix">+</span></div>
+                <p class="proof-label">unit property portfolio deployed</p>
+              </div>
+              <div class="proof-cell" id="pc-3">
+                <div class="proof-num"><span class="n" id="pn-3">0</span></div>
+                <p class="proof-label">verticals with shipped work</p>
+              </div>
+              <div class="proof-cell" id="pc-4">
+                <div class="proof-num"><span class="n" id="pn-4">0</span></div>
+                <p class="proof-label">operator end-to-end</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Scene 3: running in production -->
+      <section id="s-work" class="clip scene" data-start="11.5" data-duration="4.5" data-track-index="1">
+        <div class="inner" id="work-inner">
+          <div id="work-content">
+            <span id="work-eyebrow" class="eyebrow">Systems currently running</span>
+            <h2 id="work-h2" class="display"><span class="mask" data-layout-allow-overflow><span class="line" id="work-l1">Running in production right now.</span></span></h2>
+            <div id="work-grid">
+              <article class="work-tile work-tile--featured" id="tile-1">
+                <div class="work-tile__head">
+                  <span class="mono-label">Custom home building / Treasure Valley</span>
+                  <span class="work-tile__chip">In production</span>
+                </div>
+                <p>Four-system stack behind a Meta lead-gen launch. Response window collapsed from 6 hours to under 5 minutes.</p>
+                <span class="btn-outline">Read the case study <span aria-hidden="true">&rarr;</span></span>
+              </article>
+              <article class="work-tile" id="tile-2">
+                <div class="work-tile__head">
+                  <span class="mono-label">Property management / Western PA</span>
+                  <span class="work-tile__num">02</span>
+                </div>
+                <p>Tenant screening operations system for a 60+ unit portfolio. Fair Housing compliance built into the architecture, not bolted on.</p>
+                <span class="btn-outline">Read the case study <span aria-hidden="true">&rarr;</span></span>
+              </article>
+              <article class="work-tile" id="tile-3">
+                <div class="work-tile__head">
+                  <span class="mono-label">Commercial cleaning / Idaho multi-site</span>
+                  <span class="work-tile__num">03</span>
+                </div>
+                <p>AI front desk for a multi-site cleaning operator&rsquo;s inbox. Every inbound email read and sorted into seven types.</p>
+                <span class="btn-outline">Read the case study <span aria-hidden="true">&rarr;</span></span>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Scene 4: insight -->
+      <section id="s-insight" class="clip scene" data-start="16" data-duration="3.3" data-track-index="1">
+        <div class="inner" id="insight-inner">
+          <div id="insight-content">
+            <div id="insight-hairline"></div>
+            <h2 id="insight-h2" class="display">
+              <span class="mask" data-layout-allow-overflow><span class="line" id="ins-l1">Anyone can run ads.</span></span>
+              <span class="mask" data-layout-allow-overflow><span class="line" id="ins-l2">The <span class="accent-word">moat<span class="underline" id="moat-ul"></span></span> is underneath.</span></span>
+            </h2>
+            <p id="insight-attr" class="mono-label">From a recent build &mdash; Custom home building / Treasure Valley</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Scene 5: the call -->
+      <section id="s-cta" class="clip scene" data-start="19.3" data-duration="3.07" data-track-index="1">
+        <div class="inner" id="cta-inner">
+          <div id="cta-content">
+            <h2 id="cta-h2" class="display">
+              <span class="mask" data-layout-allow-overflow><span class="line" id="cta-l1">No pitch deck.</span></span>
+              <span class="mask" data-layout-allow-overflow><span class="line" id="cta-l2">No proposal template.</span></span>
+              <span class="mask" data-layout-allow-overflow><span class="line" id="cta-l3">Just the call.</span></span>
+            </h2>
+            <div><span id="cta-btn" class="btn-primary">Book the diagnostic</span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Scene 6: lockup -->
+      <section id="s-lock" class="clip scene" data-start="22.37" data-duration="2.13" data-track-index="1">
+        <div class="inner" id="lock-inner">
+          <div id="lock-content">
+            <div id="lock-mark" class="display">Larkin Systems</div>
+            <p id="lock-sub" class="mono-label">Built in Idaho &middot; Deployed everywhere</p>
+            <p id="lock-url">larkin.systems</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- audio: music bed on track 10, SFX on 11+ -->
+      <audio id="music-bed" src="assets/music/happy-beats-business-moves-vol-12-by-ende-dot-app.mp3"
+        data-start="0" data-duration="24.5" data-track-index="10" data-volume="0.3"
+        data-automation='{"version":1,"lanes":[{"target":"volume","points":[{"t":0,"v":0},{"t":0.5,"v":1},{"t":22.9,"v":1},{"t":24.5,"v":0}]}]}'></audio>
+      <audio id="sfx-hook" src="assets/sfx/impact/impactSoft_medium_001.ogg" data-start="1.05" data-track-index="11" data-volume="0.55"></audio>
+      <audio id="sfx-stat-1" src="assets/sfx/interface/drop_002.ogg" data-start="7.64" data-track-index="12" data-volume="0.5"></audio>
+      <audio id="sfx-stat-4" src="assets/sfx/interface/drop_002.ogg" data-start="9.29" data-track-index="13" data-volume="0.5"></audio>
+      <audio id="sfx-tile-1" src="assets/sfx/interface/drop_001.ogg" data-start="12.55" data-track-index="14" data-volume="0.45"></audio>
+      <audio id="sfx-tile-2" src="assets/sfx/interface/drop_001.ogg" data-start="13.11" data-track-index="15" data-volume="0.45"></audio>
+      <audio id="sfx-tile-3" src="assets/sfx/interface/drop_001.ogg" data-start="13.64" data-track-index="16" data-volume="0.45"></audio>
+      <audio id="sfx-btn" src="assets/sfx/impact/impactSoft_medium_004.ogg" data-start="21.28" data-track-index="17" data-volume="0.55"></audio>
+      <audio id="sfx-lock" src="assets/sfx/interface/bong_001.ogg" data-start="22.93" data-track-index="18" data-volume="0.6"></audio>
+    </div>
+
+    <script>
+      document.fonts.ready.then(function () {
+        var tl = gsap.timeline({ paused: true });
+        var EASE = "expo.out"; // closest GSAP ease to the site's cubic-bezier(0.16, 1, 0.3, 1)
+        var REVEAL = 0.6;      // --dur-reveal
+        var SLOW = 0.9;        // --dur-slow
+
+        // ---- background: slow copper drift (site's hero-drift-a/b), finite loops under the 24.5s root ----
+        tl.to("#glow-a", { x: -58, y: 22, duration: 12, ease: "sine.inOut", repeat: 1, yoyo: true }, 0);
+        tl.to("#glow-b", { x: 58, y: -22, duration: 14, ease: "sine.inOut", repeat: 0, yoyo: true }, 0);
+        tl.to("#glow-b", { x: 0, y: 0, duration: 10, ease: "sine.inOut" }, 14);
+
+        // ---- audio-reactive: glows breathe with the bed (opacity + a few % scale) ----
+        var AD = window.AUDIO_DATA;
+        var N = Math.min(AD.totalFrames, Math.ceil(24.5 * AD.fps));
+        var glowA = document.getElementById("glow-a");
+        var glowB = document.getElementById("glow-b");
+        function breathe(fr) {
+          var rms = fr[0], bass = fr[1];
+          gsap.set(glowA, { opacity: 0.78 + rms * 0.22, scale: 1 + bass * 0.045 });
+          gsap.set(glowB, { opacity: 0.72 + rms * 0.28, scale: 1 + bass * 0.03 });
+        }
+        for (var f = 0; f < N; f++) {
+          tl.call(breathe, [AD.frames[f]], f / AD.fps);
+        }
+
+        // ================= Scene 1: hero (0–7) =================
+        tl.fromTo("#hero-eyebrow", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: REVEAL, ease: EASE }, 0.56);
+        tl.fromTo("#hero-l1", { yPercent: 110 }, { yPercent: 0, duration: REVEAL, ease: EASE }, 1.09);
+        tl.fromTo("#hero-l2", { yPercent: 110 }, { yPercent: 0, duration: REVEAL, ease: EASE }, 2.73);
+        // signal path draws in (site: 1.4s cubic-bezier(0.4,0,0.2,1))
+        tl.fromTo("#sig-c", { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 1.4, ease: "power2.inOut" }, 3.3);
+        tl.fromTo("#sig-b", { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 1.4, ease: "power2.inOut" }, 3.35);
+        tl.fromTo("#sig-a", { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 1.4, ease: "power2.inOut" }, 3.45);
+        tl.fromTo(["#hex-1", "#hex-2", "#hex-3"], { opacity: 0 }, { opacity: 1, duration: 0.4, stagger: 0.18, ease: "power1.out" }, 4.0);
+        // packets travel the main line
+        tl.fromTo("#pkt-1", { attr: { cx: 20 }, opacity: 0 }, { attr: { cx: 1180 }, opacity: 1, duration: 1.8, ease: "none" }, 4.6);
+        tl.to("#pkt-1", { opacity: 0, duration: 0.3 }, 6.5);
+        tl.fromTo("#pkt-2", { attr: { cx: 20 }, opacity: 0 }, { attr: { cx: 700 }, opacity: 1, duration: 1.3, ease: "none" }, 5.6);
+        tl.fromTo("#hero-btn", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: REVEAL, ease: EASE }, 4.39);
+        tl.to("#hero-inner", { opacity: 0, duration: 0.45, ease: "power2.in" }, 6.5);
+
+        // ================= Scene 2: proof strip (7–11.5) =================
+        tl.fromTo("#proof-band", { opacity: 0, y: 28 }, { opacity: 1, y: 0, duration: REVEAL, ease: EASE }, 7.09);
+        var stats = [
+          { cell: "#pc-1", num: "#pn-1", value: 12, at: 7.64 },
+          { cell: "#pc-2", num: "#pn-2", value: 60, at: 8.19 },
+          { cell: "#pc-3", num: "#pn-3", value: 9, at: 8.74 },  // beat-locked: 8.74s
+          { cell: "#pc-4", num: "#pn-4", value: 1, at: 9.29 },  // beat-grid: 7.64 / 8.19 / 8.74 / 9.29
+        ];
+        stats.forEach(function (s) {
+          tl.fromTo(s.cell, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: REVEAL, ease: EASE }, s.at);
+          // site: 1200ms, ease 1-(1-t)^3 == power3.out
+          tl.fromTo(s.num, { textContent: 0 }, { textContent: s.value, snap: { textContent: 1 }, duration: 1.2, ease: "power3.out" }, s.at);
+        });
+        tl.to("#proof-inner", { opacity: 0, duration: 0.4, ease: "power2.in" }, 11.05);
+
+        // ================= Scene 3: running in production (11.5–16) =================
+        tl.fromTo("#work-eyebrow", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: REVEAL, ease: EASE }, 11.46);
+        tl.fromTo("#work-l1", { yPercent: 110 }, { yPercent: 0, duration: REVEAL, ease: EASE }, 11.56);
+        var tiles = [
+          { el: "#tile-1", at: 12.55 },
+          { el: "#tile-2", at: 13.11 }, // beat-locked: 13.11s
+          { el: "#tile-3", at: 13.64 }, // beat-grid: 12.55 / 13.11 / 13.64
+        ];
+        tiles.forEach(function (t) {
+          tl.fromTo(t.el, { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.7, ease: EASE }, t.at);
+        });
+        tl.to("#work-inner", { opacity: 0, duration: 0.4, ease: "power2.in" }, 15.55);
+
+        // ================= Scene 4: insight (16–19.3) =================
+        tl.fromTo("#insight-hairline", { scaleX: 0 }, { scaleX: 1, duration: SLOW, ease: EASE }, 16.38);
+        tl.fromTo("#ins-l1", { yPercent: 110 }, { yPercent: 0, duration: REVEAL, ease: EASE }, 16.93);
+        tl.fromTo("#ins-l2", { yPercent: 110 }, { yPercent: 0, duration: REVEAL, ease: EASE }, 17.47); // beat-locked: 17.47s
+        tl.fromTo("#moat-ul", { scaleX: 0 }, { scaleX: 1, duration: 0.5, ease: EASE }, 17.95);
+        tl.fromTo("#insight-attr", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: REVEAL, ease: EASE }, 18.56);
+        tl.to("#insight-inner", { opacity: 0, duration: 0.35, ease: "power2.in" }, 18.9);
+
+        // ================= Scene 5: the call (19.3–22.37) =================
+        tl.fromTo("#cta-l1", { yPercent: 110 }, { yPercent: 0, duration: REVEAL, ease: EASE }, 19.66); // beat-locked: 19.66s
+        tl.fromTo("#cta-l2", { yPercent: 110 }, { yPercent: 0, duration: REVEAL, ease: EASE }, 20.19);
+        tl.fromTo("#cta-l3", { yPercent: 110 }, { yPercent: 0, duration: REVEAL, ease: EASE }, 20.75); // beat-grid: 19.66 / 20.19 / 20.75
+        tl.fromTo("#cta-btn", { opacity: 0, y: 18, scale: 0.98 }, { opacity: 1, y: 0, scale: 1, duration: 0.5, ease: EASE }, 21.28);
+        tl.to("#cta-inner", { opacity: 0, duration: 0.3, ease: "power2.in" }, 22.05);
+
+        // ================= Scene 6: lockup (22.37–24.5) =================
+        tl.fromTo("#lock-mark", { opacity: 0, scale: 0.98 }, { opacity: 1, scale: 1, duration: 0.7, ease: EASE }, 22.37);
+        tl.fromTo("#lock-sub", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: REVEAL, ease: EASE }, 22.93); // beat-locked: 22.93s
+        tl.fromTo("#lock-url", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: REVEAL, ease: EASE }, 23.1);
+
+        window.__timelines["main"] = tl;
+        if (window.__hfForceTimelineRebind) window.__hfForceTimelineRebind();
+      });
+    </script>
+  </body>
+</html>
